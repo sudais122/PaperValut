@@ -1,196 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PaperVault — Past Papers, Simplified</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 </head>
 <body>
-<nav>
-  <div class="nav-logo">Paper<span>Vault</span></div>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Paper<span>Vault</span></a>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#what">How It Works</a></li>
+    <li><a href="#how">How It Works</a></li>
     <li><a href="#why">Why Us</a></li>
   </ul>
   <div class="nav-btns">
     <a href="./Login/login.html" class="btn-login">Login</a>
     <a href="./Register/Register.html" class="btn-signup">Sign Up</a>
   </div>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- ── HERO ── -->
 <section id="home">
-  <div class="hero-bg-pattern"></div>
+  <div class="hero-dots"></div>
   <div class="hero-glow"></div>
+  <div class="hero-glow hero-glow-2"></div>
+
   <div class="hero-inner">
-    <div>
-      <div class="hero-badge fade-up">
-        <div class="hero-dot"></div>
-        <span>No More Searching – Find All AWKUM Past Papers Here</span>
+    <div class="hero-text reveal">
+      <div class="hero-badge">
+        <span class="hero-dot"></span>
+        No More Searching – Find All AWKUM Past Papers Here
       </div>
-      <h1 class="fade-up delay-1">      Access past papers by course, teacher, and exam type — all in one place.
-</h1>
-      <p class="hero-sub fade-up delay-2">
+      <h1>
+        Access Past Papers by<br/>
+        <span class="gold-text">Course, Teacher</span><br/>
+        &amp; Exam Type
+      </h1>
+      <p class="hero-sub">
         Stop searching WhatsApp groups. PaperVault gives students instant access to past exam papers — filtered by teacher, subject, course, and term.
       </p>
-      <div class="hero-btns fade-up delay-3">
-        <a href="#what" class="btn-primary">Browse Papers</a>
-        <a href="#about" class="btn-outline">Learn More</a>
+      <div class="hero-btns">
+        <a href="#how" class="btn-primary">Browse Papers <i class="fas fa-arrow-right"></i></a>
+        <a href="#about" class="btn-ghost">Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">1,200+</div>
+          <div class="stat-label">Papers Archived</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Subjects</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="stat-num">5K+</div>
+          <div class="stat-label">Students Helped</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal delay-2">
+      <div class="paper-card">
+        <div class="paper-card-top">
+          <span class="paper-tag tag-final">Final Term</span>
+          <span class="paper-year">2024</span>
+        </div>
+        <div class="paper-title">Data Structures &amp; Algorithms</div>
+        <div class="paper-sub">CS-301 · Computer Science</div>
+        <div class="paper-actions">
+          <span class="paper-teacher"><i class="fas fa-user-tie"></i> Dr. Ahmad Khan</span>
+          <button class="download-btn"><i class="fas fa-download"></i> Download</button>
+        </div>
+      </div>
+      <div class="paper-card card-offset">
+        <div class="paper-card-top">
+          <span class="paper-tag tag-mid">Mid Term</span>
+          <span class="paper-year">2023</span>
+        </div>
+        <div class="paper-title">Calculus &amp; Analytical Geometry</div>
+        <div class="paper-sub">MTH-101 · Mathematics</div>
+        <div class="paper-actions">
+          <span class="paper-teacher"><i class="fas fa-user-tie"></i> Prof. Nadia Shah</span>
+          <button class="download-btn"><i class="fas fa-download"></i> Download</button>
+        </div>
+      </div>
+      <div class="paper-card card-offset-2">
+        <div class="paper-card-top">
+          <span class="paper-tag tag-quiz">Quiz</span>
+          <span class="paper-year">2024</span>
+        </div>
+        <div class="paper-title">Principles of Management</div>
+        <div class="paper-sub">MGT-201 · Business Admin</div>
+        <div class="paper-actions">
+          <span class="paper-teacher"><i class="fas fa-user-tie"></i> Mr. Bilal Yousaf</span>
+          <button class="download-btn"><i class="fas fa-download"></i> Download</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
- <div class="page">
- 
-    <div class="label"><i class="fas fa-book-open" style="font-size:11px;"></i> About PaperVault</div>
-    <h1 class="page-title">Built for <span>AWKUM</span> Students</h1>
-    <p class="page-subtitle">A community-driven repository of past exam papers — free, searchable, and organized.</p>
-    <div class="divider"></div>
- 
-    <div class="two-col">
-      <div class="block">
-        <p class="sec-label">Our Story</p>
-        <h2 class="sec-title">Why We Built This</h2>
-        <p class="sec-text">Students at Abdul Wali Khan University were spending hours digging through scattered WhatsApp groups just to find one past paper before exams.</p>
-        <p class="sec-text">PaperVault changes that — one organized, always-free platform where every paper is tagged, verified, and a click away.</p>
-      </div>
- 
-      <div class="block vision">
-        <p class="sec-label">Our Vision</p>
-        <h2 class="sec-title">Where We're Going</h2>
-        <p class="sec-text">We started at AWKUM, but our goal is bigger — a centralized vault connecting students from every university across Pakistan.</p>
-        <p class="vision-quote">"No student should fail because they couldn't find the right resource."</p>
-      </div>
-    </div>
- 
-    <p class="sec-label">What We Offer</p>
-    <h2 class="sec-title" style="margin-bottom:20px;">Core Features</h2>
- 
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon"><i class="fas fa-search"></i></div>
-        <h4>Smart Search</h4>
-        <p>Filter papers by subject, teacher, course code, year, or exam type — instantly.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon"><i class="fas fa-users"></i></div>
-        <h4>Community Uploads</h4>
-        <p>Papers uploaded by seniors, verified before going live in the vault.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon"><i class="fas fa-unlock"></i></div>
-        <h4>Free & Open Access</h4>
-        <p>No account, no paywall, no fees. Every paper is open to every student.</p>
-      </div>
-    </div>
- 
-  </div>
-<!-- WHAT IS THIS WEBSITE -->
-<section id="what">
+<!-- ── ABOUT ── -->
+<section id="about">
   <div class="section-inner">
-    <div style="text-align:center; margin-bottom:16px;">
-      <span class="section-tag" style="color: var(--gold);">How It Works</span>
+    <div class="about-top reveal">
+      <p class="section-tag"><i class="fas fa-book-open"></i> About PaperVault</p>
+      <h2>Built for <span class="gold-text">AWKUM</span> Students</h2>
+      <p class="section-lead">A community-driven repository of past exam papers — free, searchable, and organized so you can focus on studying, not hunting.</p>
     </div>
-    <h2 style="text-align:center; color:white; max-width:600px; margin:0 auto 12px;">
-      Three Simple Steps to Your Paper
-    </h2>
-    <p class="section-lead" style="text-align:center; margin:0 auto;">
-      PaperVault makes finding and sharing exam papers incredibly easy. Here's how students use it every day.
-    </p>
-    <div class="what-grid">
-      <div class="what-card">
-        <div class="what-step">1</div>
-        <h3>Search Your Paper</h3>
-        <p>Enter your university, department, subject name, course code, or teacher's name. Our smart filter helps you find exactly what you need in seconds.</p>
+
+    <div class="about-cards reveal delay-1">
+      <div class="glass-card">
+        <div class="glass-card-icon"><i class="fas fa-history"></i></div>
+        <p class="sec-label">Our Story</p>
+        <h3>Why We Built This</h3>
+        <p>Students at Abdul Wali Khan University were spending hours digging through scattered WhatsApp groups just to find one past paper. PaperVault changes that — one organized, always-free platform where every paper is tagged, verified, and a click away.</p>
       </div>
-      <div class="what-card">
-        <div class="what-step">2</div>
-        <h3>Download Instantly</h3>
-        <p>View and download the paper for free. Papers include mid-term and final-term versions, organized by year so you can practice with multiple past exams.</p>
+      <div class="glass-card vision-card">
+        <div class="glass-card-icon"><i class="fas fa-binoculars"></i></div>
+        <p class="sec-label">Our Vision</p>
+        <h3>Where We're Going</h3>
+        <p>We started at AWKUM, but our goal is bigger — a centralized vault connecting students from every university across Pakistan.</p>
+        <blockquote>"No student should fail because they couldn't find the right resource."</blockquote>
       </div>
-      <div class="what-card">
-        <div class="what-step">3</div>
-        <h3>Upload & Contribute</h3>
-        <p>After your exam, upload the paper to help the next batch of students. The more people contribute, the more powerful PaperVault becomes for everyone.</p>
+    </div>
+
+    <div class="about-features reveal delay-2">
+      <p class="sec-label" style="text-align:center; margin-bottom:8px;">Core Features</p>
+      <h3 class="features-heading">Everything You Need to Ace Your Exams</h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-search"></i></div>
+          <h4>Smart Search</h4>
+          <p>Filter by subject, teacher, course code, year, or exam type — instantly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-users"></i></div>
+          <h4>Community Uploads</h4>
+          <p>Papers uploaded by seniors, verified before going live in the vault.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-unlock"></i></div>
+          <h4>Free & Open Access</h4>
+          <p>No account required, no paywall, no fees. Every paper, every student.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE US -->
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <p class="section-tag"><i class="fas fa-bolt"></i> How It Works</p>
+      <h2>Three Steps to Your Paper</h2>
+      <p class="section-lead">PaperVault makes finding and sharing exam papers incredibly easy.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal delay-1">
+        <div class="step-num">01</div>
+        <div class="step-icon-wrap"><i class="fas fa-search"></i></div>
+        <h3>Search Your Paper</h3>
+        <p>Enter your university, department, subject, course code, or teacher's name. Our smart filters narrow results to exactly what you need.</p>
+      </div>
+      <div class="step-card reveal delay-2">
+        <div class="step-num">02</div>
+        <div class="step-icon-wrap"><i class="fas fa-download"></i></div>
+        <h3>Download Instantly</h3>
+        <p>View and download any paper for free — mid-term and final-term versions organized by year so you can practice with multiple past exams.</p>
+      </div>
+      <div class="step-card reveal delay-3">
+        <div class="step-num">03</div>
+        <div class="step-icon-wrap"><i class="fas fa-cloud-upload-alt"></i></div>
+        <h3>Upload & Contribute</h3>
+        <p>After your exam, upload your paper to help the next batch. The more people contribute, the more powerful PaperVault becomes for everyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
 <section id="why">
   <div class="section-inner">
-    <div class="why-intro">
+    <div class="why-header reveal">
       <div>
-        <span class="section-tag">Why Choose Us</span>
+        <p class="section-tag"><i class="fas fa-star"></i> Why Choose Us</p>
         <h2>Everything You Need,<br/>Nothing You Don't</h2>
       </div>
-      <p class="section-lead" style="max-width:360px;">
-        We keep it simple. No confusing menus, no paywalls. Just papers.
-      </p>
+      <p class="section-lead" style="max-width:340px;">We keep it simple. No confusing menus, no paywalls. Just papers.</p>
     </div>
-
     <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon">🔍</div>
+      <div class="why-card reveal delay-1">
+        <div class="why-icon"><i class="fas fa-search"></i></div>
         <h3>Smart Search & Filters</h3>
-        <p>Search by teacher name, subject, course code, department, year, or exam type. Find the exact paper you need without scrolling endlessly.</p>
+        <p>Search by teacher, subject, course code, department, year, or exam type. Find the exact paper you need without scrolling endlessly.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">⚡</div>
+      <div class="why-card reveal delay-2">
+        <div class="why-icon"><i class="fas fa-bolt"></i></div>
         <h3>Instant Free Access</h3>
-        <p>No sign-up required to browse. No fees, no subscriptions. Every paper is available for free download because education should be accessible to all.</p>
+        <p>No sign-up required to browse. No fees, no subscriptions. Every paper is free because education should be accessible to all.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">🧑‍🎓</div>
+      <div class="why-card reveal delay-3">
+        <div class="why-icon"><i class="fas fa-users"></i></div>
         <h3>Community Powered</h3>
-        <p>Students upload papers after their exams. The more students contribute, the bigger and better the library gets — making PaperVault stronger every semester.</p>
+        <p>Students upload papers after their exams. The more students contribute, the bigger the library gets — stronger every semester.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">🏫</div>
+      <div class="why-card reveal delay-1">
+        <div class="why-icon"><i class="fas fa-university"></i></div>
         <h3>Multi-University Support</h3>
-        <p>Whether you're at a public or private university, in KPK, Punjab, Sindh, or Balochistan — we support universities from all across Pakistan.</p>
+        <p>Whether you're in KPK, Punjab, Sindh, or Balochistan — we support universities from all across Pakistan.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">📱</div>
+      <div class="why-card reveal delay-2">
+        <div class="why-icon"><i class="fas fa-mobile-alt"></i></div>
         <h3>Mobile Friendly</h3>
-        <p>Study anywhere on any device. PaperVault is fully optimized for mobile phones, so you can access papers right before your exam even on the go.</p>
+        <p>Study anywhere on any device. PaperVault is fully optimized for mobile so you can access papers right before your exam.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">🔒</div>
+      <div class="why-card reveal delay-3">
+        <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
         <h3>Safe & Verified</h3>
-        <p>Uploaded papers go through a basic review process. Our community flagging system ensures the content is genuine and actually helpful for students.</p>
+        <p>Uploaded papers go through a basic review process. Our community flagging system ensures content is genuine and helpful.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ── CTA ── -->
 <section id="cta">
-  <div class="section-inner">
+  <div class="cta-inner reveal">
+    <p class="section-tag"><i class="fas fa-graduation-cap"></i> Get Started</p>
     <h2>Ready to Crush Your Exams?</h2>
-    <p>Join thousands of Pakistani students who are already using PaperVault to prepare smarter and score higher.</p>
+    <p>Join thousands of Pakistani students already using PaperVault to prepare smarter and score higher.</p>
     <div class="cta-btns">
-      <a href="#" class="btn-primary">Browse All Papers</a>
-      <a href="../Client/Login/login.html" class="btn-outline">Upload a Paper</a>
+      <a href="#" class="btn-primary">Browse All Papers <i class="fas fa-arrow-right"></i></a>
+      <a href="#" class="btn-ghost">Upload a Paper</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer>
-  <div class="footer-logo">Paper<span>Vault</span></div>
-  <p>© 2025 PaperVault — Made with ❤️ for AWKUM Students</p>
-  <div class="footer-links">
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Paper<span>Vault</span></div>
+      <p>Making past papers accessible for every student across Pakistan — one upload at a time.</p>
+    </div>
+    <div class="footer-links-group">
+      <p class="footer-heading">Platform</p>
+      <a href="#">Browse Papers</a>
+      <a href="#">Upload a Paper</a>
+      <a href="#">How It Works</a>
+    </div>
+    <div class="footer-links-group">
+      <p class="footer-heading">Company</p>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 PaperVault — Made with <span style="color:var(--gold)">♥</span> for AWKUM Students</p>
+    <div class="footer-socials">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
   </div>
 </footer>
 
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+
+  // Navbar shrink on scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger
+  const ham = document.querySelector('.nav-hamburger');
+  const links = document.querySelector('.nav-links');
+  ham.addEventListener('click', () => links.classList.toggle('open'));
+</script>
 </body>
 </html>
