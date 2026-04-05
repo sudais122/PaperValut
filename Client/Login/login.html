@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Css/Auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Paper<span>Vault</span></a>
+</nav>
+
+<main>
+  <div class="login-wrapper">
+    <div class="card">
+
+      <div class="card-header">
+        <span class="logo">Paper<span>Vault</span></span>
+        <p class="tagline">Login to your account</p>
+      </div>
+
+      <div class="card-body">
+        <form id="login-form">
+
+          <!-- EMAIL -->
+          <div class="form-group">
+            
+            <label for="l-email">Email</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-envelope input-icon"></i>
+              <input type="email" id="l-email" placeholder="you@example.com"/>
+            </div>
+          </div>
+
+          <!-- PASSWORD -->
+          <div class="form-group">
+            <label for="l-password">Password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="l-password" placeholder="Enter password"/>
+              <button type="button" class="eye-toggle" id="eye-btn" onclick="togglePassword()" aria-label="Show password">
+                <i class="fa-regular fa-eye" id="eye-icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="login-btn">
+            Login
+          </button>
+          <div class="divider">or</div>
+          <p class="register-prompt">
+            Don't have an account?
+            <a href="../Register/Register.html">Register here →</a>
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</main>
+<script src="../JavaScript/auth.js"></script>
+</body>
+</html>

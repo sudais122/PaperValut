@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/Auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <title>Document</title>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Paper<span>Vault</span></a>
+</nav>
+
+<main>
+  <div class="login-wrapper">
+    <div class="card">
+
+      <div class="card-header">
+        <span class="logo">Paper<span>Vault</span></span>
+        <p class="tagline">Create your account</p>
+      </div>
+
+      <div class="card-body">
+        <form id="register-form">
+
+          <!-- FIRST NAME -->
+          <div class="form-group">
+            <label for="r-firstname">First Name</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-user input-icon"></i>
+              <input type="text" id="r-firstname" placeholder="Ahmed"/>
+            </div>
+          </div>
+
+          <!-- LAST NAME -->
+          <div class="form-group">
+            <label for="r-lastname">Last Name</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-user input-icon"></i>
+              <input type="text" id="r-lastname" placeholder="Khan"/>
+            </div>
+          </div>
+
+          <!-- EMAIL -->
+          <div class="form-group">
+            <label for="r-email">Email</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-envelope input-icon"></i>
+              <input type="email" id="r-email" placeholder="you@example.com"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="r-password">Password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input
+                type="password"
+                id="r-password"
+                placeholder="Min 6 characters"
+                oninput="checkStrength(this.value)"
+              />
+              <button
+                type="button"
+                class="eye-toggle"
+                id="eye-btn"
+                onclick="togglePassword()"
+                aria-label="Show password"
+              >
+                <i class="fa-regular fa-eye" id="eye-icon"></i>
+              </button>
+            </div>
+            <!-- Strength bar -->
+            <div class="strength-wrap">
+              <div class="strength-bar-track">
+                <div class="strength-bar-fill" id="strength-bar"></div>
+              </div>
+              <div class="strength-label" id="strength-label"></div>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn" id="register-btn">
+            Create Account
+          </button>
+
+          <div class="divider">or</div>
+
+          <p class="register-prompt">
+            Already have an account?
+            <a href="../Login/login.html">Login here →</a>
+          </p>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="../JavaScript/auth.js"></script>
+</body>
+</html>

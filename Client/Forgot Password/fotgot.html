@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password — PaperVault</title>
+    <link rel="stylesheet" href="../Css/Auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<nav>
+    <a href="./fotgot.html" class="nav-logo">Paper<span>Vault</span></a>
+</nav>
+<main>
+    <div class="login-wrapper">
+        <div class="card">
+
+            <div class="card-header">
+                <span class="logo">Paper<span>Vault</span></span>
+                <p class="tagline">Reset your password</p>
+            </div>
+
+            <div class="card-body">
+
+                <!-- Step dots -->
+                <div class="step-dots">
+                    <div class="dot active" id="dot-1"></div>
+                    <div class="dot"        id="dot-2"></div>
+                    <div class="dot"        id="dot-3"></div>
+                </div>
+
+                <!-- Alert boxes (shared) -->
+                <div class="error-box" id="error-box">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="error-msg"></span>
+                </div>
+                <div class="success-box" id="success-box">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span id="success-msg"></span>
+                </div>
+
+                <!-- ── STEP 1 — Enter Email ── -->
+                <div class="step active" id="step-1">
+                    <div class="info-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Enter your registered email and we will send you a 6-digit reset code.
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fp-email">Email Address</label>
+                        <div class="input-wrap">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" id="fp-email" placeholder="you@example.com"/>
+                        </div>
+                    </div>
+
+                    <button class="submit-btn" id="send-btn" onclick="sendCode()">
+                        <span class="btn-text">Send Reset Code</span>
+                        <div class="btn-spinner"></div>
+                    </button>
+
+                    <a href="../Login/login.html" class="back-to-login">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Login
+                    </a>
+                </div>
+
+                <!-- ── STEP 2 — Enter OTP ── -->
+                <div class="step" id="step-2">
+                    <div class="info-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                        A 6-digit code was sent to <strong id="sent-to-email"
+                        style="color:var(--gold,#E6A817)"></strong>. Enter it below.
+                    </div>
+
+                    <div class="otp-wrap" id="otp-wrap">
+                        <input type="text" maxlength="1" class="otp-box" inputmode="numeric"/>
+                        <input type="text" maxlength="1" class="otp-box" inputmode="numeric"/>
+                        <input type="text" maxlength="1" class="otp-box" inputmode="numeric"/>
+                        <input type="text" maxlength="1" class="otp-box" inputmode="numeric"/>
+                        <input type="text" maxlength="1" class="otp-box" inputmode="numeric"/>
+                        <input type="text" maxlength="1" class="otp-box" inputmode="numeric"/>
+                    </div>
+
+                    <div class="resend-row">
+                        Didn't receive it?
+                        <button id="resend-btn" onclick="resendCode()" disabled>
+                            Resend in <span id="countdown">30</span>s
+                        </button>
+                    </div>
+
+                    <button class="submit-btn" id="verify-btn" onclick="verifyCode()">
+                        <span class="btn-text">Verify Code</span>
+                        <div class="btn-spinner"></div>
+                    </button>
+
+                    <a href="login.html" class="back-to-login">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Login
+                    </a>
+                </div>
+
+                <!-- ── STEP 3 — New Password ── -->
+                <div class="step" id="step-3">
+
+                    <div class="form-group">
+                        <label for="fp-newpass">New Password</label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input
+                                type="password"
+                                id="fp-newpass"
+                                placeholder="Min 6 characters"
+                                class="has-toggle"
+                                oninput="checkStrength(this.value)"
+                            />
+                            <button type="button" class="eye-toggle" onclick="toggleEye('fp-newpass','eye-new')" aria-label="Show password">
+                                <i class="fa-regular fa-eye" id="eye-new"></i>
+                            </button>
+                        </div>
+                        <div class="strength-wrap">
+                            <div class="strength-bar-track">
+                                <div class="strength-bar-fill" id="strength-bar"></div>
+                            </div>
+                            <div class="strength-label" id="strength-label"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fp-confirm">Confirm New Password</label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-shield-halved input-icon"></i>
+                            <input
+                                type="password"
+                                id="fp-confirm"
+                                placeholder="Re-enter new password"
+                                class="has-toggle"
+                                oninput="checkMatch()"
+                            />
+                            <button type="button" class="eye-toggle" onclick="toggleEye('fp-confirm','eye-confirm')" aria-label="Show password">
+                                <i class="fa-regular fa-eye" id="eye-confirm"></i>
+                            </button>
+                        </div>
+                        <div class="match-label" id="match-label"></div>
+                    </div>
+
+                    <button class="submit-btn" id="reset-btn" onclick="resetPassword()">
+                        <span class="btn-text">Reset Password</span>
+                        <div class="btn-spinner"></div>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="../JavaScript/auth.js"></script>
+</body>
+</html>
