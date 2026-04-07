@@ -127,7 +127,7 @@ h2 {
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transition: opacity 0.65s ease ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .delay-1 { transition-delay: 0.12s; }
@@ -280,7 +280,7 @@ nav.scrolled {
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 60px;
   align-items: center;
 }
@@ -422,7 +422,7 @@ h1 {
   padding: 32px 30px;
   transition: border-color 0.25s, transform 0.25s;
 }
-.glass-card:hover { border-color: rgba(230,168,23,0.3); transform: translateY(-4px); }
+.glass-card:hover { border-color: rgba(230,168,23,0.3); }
 
 .glass-card-icon {
   width: 46px; height: 46px;
@@ -443,7 +443,6 @@ h1 {
 }
 .glass-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.75; }
 
-.vision-card { border-left: 2px solid var(--gold); }
 
 .vision-card blockquote {
   font-family: 'Playfair Display', serif;
@@ -482,7 +481,6 @@ h1 {
 .feature-card:hover {
   background: rgba(230,168,23,0.1);
   border-color: rgba(230,168,23,0.35);
-  transform: translateY(-4px);
 }
 
 .feature-icon {
@@ -583,7 +581,6 @@ h1 {
 .why-card:hover {
   border-color: rgba(230,168,23,0.35);
   background: rgba(255,255,255,0.07);
-  transform: translateY(-4px);
 }
 
 .why-icon {

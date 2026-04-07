@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse Papers — PaperVault</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="paper.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="../index.html" class="nav-logo">Paper<span>Vault</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="#" class="active">Browse Papers</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#how">How It Works</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a href="../Login/login.html" class="btn-login">Login</a>
+    <a href="../Register/Register.html" class="btn-signup">Sign Up</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── PAGE HEADER ── -->
+<div class="page-header">
+  <div class="header-dots"></div>
+  <div class="header-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Browse Papers</span>
+    </div>
+    <h1>Browse Past Papers</h1>
+    <p>Find exam papers filtered by department, course, teacher, and exam type.</p>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="main-wrap">
+
+  <!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="filter-panel">
+    <div class="filter-panel-title">
+      <i class="fas fa-sliders-h"></i> Filters
+    </div>
+
+    <!-- Department -->
+    <div class="filter-group">
+      <span class="filter-label">Department</span>
+      <div class="custom-select">
+        <select id="deptFilter">
+          <option value="">All Departments</option>
+          <option value="bio">Biotechnology</option>
+          <option value="bba">Business Administration</option>
+          <option value="chem">Chemistry</option>
+          <option value="com">Commerce</option>
+          <option value="cs">Computer Science</option>
+          <option value="crim">Criminology</option>
+          <option value="eco">Economics</option>
+          <option value="edu">Education</option>
+          <option value="eng">English</option>
+          <option value="env">Environmental Sciences</option>
+          <option value="hist">History</option>
+          <option value="ir">International Relations</option>
+          <option value="isl">Islamic Studies</option>
+          <option value="it">Information Technology</option>
+          <option value="law">Law</option>
+          <option value="lis">Library & Information Science</option>
+          <option value="math">Mathematics</option>
+          <option value="media">Media & Communication Studies</option>
+          <option value="micro">Microbiology</option>
+          <option value="pak">Pakistan Studies</option>
+          <option value="phy">Physics</option>
+          <option value="pol">Political Science</option>
+          <option value="psy">Psychology</option>
+          <option value="se">Software Engineering</option>
+          <option value="soc">Sociology</option>
+          <option value="stat">Statistics</option>
+          <option value="tour">Tourism & Hospitality</option>
+          <option value="urdu">Urdu</option>
+          <option value="zoo">Zoology</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Course -->
+    <div class="filter-group">
+      <span class="filter-label">Course</span>
+      <div class="custom-select">
+        <select id="courseFilter">
+          <option value="">All Courses</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Teacher -->
+    <div class="filter-group">
+      <span class="filter-label">Teacher</span>
+      <div class="custom-select">
+        <select id="teacherFilter">
+          <option value="">All Teachers</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Exam Type -->
+    <div class="filter-group">
+      <span class="filter-label">Exam Type</span>
+      <div class="pill-group">
+        <span class="pill active-all" data-type="all">All</span>
+        <span class="pill" data-type="Final Term">Final Term</span>
+        <span class="pill" data-type="Mid Term">Mid Term</span>
+        <span class="pill" data-type="Quiz">Quiz</span>
+      </div>
+    </div>
+
+    <!-- Year Range -->
+    <div class="filter-group">
+      <span class="filter-label">Year Range</span>
+      <div class="year-range">
+        <input type="number" id="yearFrom" placeholder="From" min="2015" max="2025">
+        <input type="number" id="yearTo" placeholder="To" min="2015" max="2025">
+      </div>
+    </div>
+
+    <!-- Clear Filters -->
+    <button class="clear-btn" onclick="clearFilters()">
+      <i class="fas fa-times"></i> Clear All Filters
+    </button>
+  </div>
+
+  <!-- Upload Banner -->
+  <div class="upload-banner" style="background:var(--glass); border:1px solid var(--glass-border); border-radius:16px; padding:20px; text-align:center; margin-top:20px;">
+    <div style="width:44px; height:44px; background:rgba(230,168,23,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-size:18px; color:var(--gold);">
+      <i class="fas fa-cloud-upload-alt"></i>
+    </div>
+    <h4 style="font-size:0.9rem; color:var(--white); margin-bottom:6px;">Have a paper?</h4>
+    <p style="font-size:0.78rem; color:var(--text-light); margin-bottom:14px;">Help fellow students by uploading your past papers.</p>
+    <a href="#" class="upload-btn" style="width:100%; display:flex; justify-content:center; align-items:center; padding:10px 0; background:var(--gold); color:var(--dark); border-radius:8px; text-decoration:none; font-weight:500;">
+      <i class="fas fa-plus" style="margin-right:6px;"></i> Upload Paper
+    </a>
+  </div>
+</aside>
+
+  <!-- RESULTS -->
+  <main class="results-area">
+    <!-- Search Row -->
+    <div class="search-row">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search by subject, course code, or teacher..." oninput="applyFilters()">
+      </div>
+      <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+      </select>
+    </div>
+
+    <!-- Results Meta -->
+    <div class="results-meta">
+      <div class="results-count">Showing <strong id="shownCount">0</strong> papers</div>
+      <div class="active-filters" id="activeChips"></div>
+    </div>
+
+    <!-- Papers Grid -->
+    <div class="papers-grid" id="papersGrid"></div>
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Paper<span>Vault</span></div>
+    <div class="footer-links">
+      <a href="../index.html">Home</a>
+      <a href="#">Browse Papers</a>
+      <a href="#">Upload</a>
+      <a href="../index.html#about">About</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 PaperVault — Made with ♥ for AWKUM Students</p>
+    <div class="footer-socials">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="paper.js"></script>
+</body>
+</html>

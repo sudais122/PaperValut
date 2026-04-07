@@ -40,16 +40,15 @@
         <span class="hero-dot"></span>
         No More Searching – Find All AWKUM Past Papers Here
       </div>
-      <h1>
-        Access Past Papers by<br/>
-        <span class="gold-text">Course, Teacher</span><br/>
+      <h1 style="font-family: sans-serif; font-weight: bolder; font-size: 3.7rem; line-height: 1.5;">
+        Access Past Papers by Course, Teacher
         &amp; Exam Type
       </h1>
       <p class="hero-sub">
         Stop searching WhatsApp groups. PaperVault gives students instant access to past exam papers — filtered by teacher, subject, course, and term.
       </p>
       <div class="hero-btns">
-        <a href="#how" class="btn-primary">Browse Papers <i class="fas fa-arrow-right"></i></a>
+        <a href="./Paper/paper.html" class="btn-primary">Browse Papers <i class="fas fa-arrow-right"></i></a>
         <a href="#about" class="btn-ghost">Learn More</a>
       </div>
       <div class="hero-stats">
@@ -66,45 +65,6 @@
         <div class="stat">
           <div class="stat-num">5K+</div>
           <div class="stat-label">Students Helped</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-visual reveal delay-2">
-      <div class="paper-card">
-        <div class="paper-card-top">
-          <span class="paper-tag tag-final">Final Term</span>
-          <span class="paper-year">2024</span>
-        </div>
-        <div class="paper-title">Data Structures &amp; Algorithms</div>
-        <div class="paper-sub">CS-301 · Computer Science</div>
-        <div class="paper-actions">
-          <span class="paper-teacher"><i class="fas fa-user-tie"></i> Dr. Ahmad Khan</span>
-          <button class="download-btn"><i class="fas fa-download"></i> Download</button>
-        </div>
-      </div>
-      <div class="paper-card card-offset">
-        <div class="paper-card-top">
-          <span class="paper-tag tag-mid">Mid Term</span>
-          <span class="paper-year">2023</span>
-        </div>
-        <div class="paper-title">Calculus &amp; Analytical Geometry</div>
-        <div class="paper-sub">MTH-101 · Mathematics</div>
-        <div class="paper-actions">
-          <span class="paper-teacher"><i class="fas fa-user-tie"></i> Prof. Nadia Shah</span>
-          <button class="download-btn"><i class="fas fa-download"></i> Download</button>
-        </div>
-      </div>
-      <div class="paper-card card-offset-2">
-        <div class="paper-card-top">
-          <span class="paper-tag tag-quiz">Quiz</span>
-          <span class="paper-year">2024</span>
-        </div>
-        <div class="paper-title">Principles of Management</div>
-        <div class="paper-sub">MGT-201 · Business Admin</div>
-        <div class="paper-actions">
-          <span class="paper-teacher"><i class="fas fa-user-tie"></i> Mr. Bilal Yousaf</span>
-          <button class="download-btn"><i class="fas fa-download"></i> Download</button>
         </div>
       </div>
     </div>
@@ -170,19 +130,16 @@
     </div>
     <div class="steps-grid">
       <div class="step-card reveal delay-1">
-        <div class="step-num">01</div>
         <div class="step-icon-wrap"><i class="fas fa-search"></i></div>
         <h3>Search Your Paper</h3>
         <p>Enter your university, department, subject, course code, or teacher's name. Our smart filters narrow results to exactly what you need.</p>
       </div>
       <div class="step-card reveal delay-2">
-        <div class="step-num">02</div>
         <div class="step-icon-wrap"><i class="fas fa-download"></i></div>
         <h3>Download Instantly</h3>
         <p>View and download any paper for free — mid-term and final-term versions organized by year so you can practice with multiple past exams.</p>
       </div>
       <div class="step-card reveal delay-3">
-        <div class="step-num">03</div>
         <div class="step-icon-wrap"><i class="fas fa-cloud-upload-alt"></i></div>
         <h3>Upload & Contribute</h3>
         <p>After your exam, upload your paper to help the next batch. The more people contribute, the more powerful PaperVault becomes for everyone.</p>
@@ -235,20 +192,6 @@
     </div>
   </div>
 </section>
-
-<!-- ── CTA ── -->
-<section id="cta">
-  <div class="cta-inner reveal">
-    <p class="section-tag"><i class="fas fa-graduation-cap"></i> Get Started</p>
-    <h2>Ready to Crush Your Exams?</h2>
-    <p>Join thousands of Pakistani students already using PaperVault to prepare smarter and score higher.</p>
-    <div class="cta-btns">
-      <a href="#" class="btn-primary">Browse All Papers <i class="fas fa-arrow-right"></i></a>
-      <a href="#" class="btn-ghost">Upload a Paper</a>
-    </div>
-  </div>
-</section>
-
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
@@ -279,24 +222,6 @@
   </div>
 </footer>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => obs.observe(el));
-
-  // Navbar shrink on scroll
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // Hamburger
-  const ham = document.querySelector('.nav-hamburger');
-  const links = document.querySelector('.nav-links');
-  ham.addEventListener('click', () => links.classList.toggle('open'));
-</script>
+<script src="index.js"></script>
 </body>
 </html>
