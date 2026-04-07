@@ -30,7 +30,6 @@
 
 <!-- ── PAGE HEADER ── -->
 <div class="page-header">
-  <div class="header-dots"></div>
   <div class="header-inner">
     <div class="breadcrumb">
       <a href="../index.html">Home</a>
@@ -40,8 +39,18 @@
     <h1>Browse Past Papers</h1>
     <p>Find exam papers filtered by department, course, teacher, and exam type.</p>
   </div>
+  <div class="upload-main">
+<div class="upload-box">
+  <div class="upload-content">
+    <a href="#" class="upload-box-btn">
+      <i class="fas fa-cloud-upload-alt"></i>
+      Upload Paper
+    </a>
+    <span class="upload-hint">Help others by sharing</span>
+  </div>
 </div>
-
+</div>
+</div>
 <!-- ── MAIN ── -->
 <div class="main-wrap">
 
@@ -100,7 +109,25 @@
         </select>
       </div>
     </div>
-
+<!-- Semester -->
+<div class="filter-group">
+  <span class="filter-label">Semester/Year</span>
+  <div class="custom-select">
+    <select id="semesterFilter" onchange="applyFilters()">
+      <option value="">All Semesters/Years</option>
+      <option value="1">Semester 1</option>
+      <option value="2">Semester 2</option>
+      <option value="3">Semester 3</option>
+      <option value="4">Semester 4</option>
+      <option value="5">Semester 5</option>
+      <option value="6">Semester 6</option>
+      <option value="7">Semester 7</option>
+      <option value="8">Semester 8</option>
+      <option value="8">Semester 9</option>
+      <option value="8">Semester 10</option>
+    </select>
+  </div>
+</div>
     <!-- Teacher -->
     <div class="filter-group">
       <span class="filter-label">Teacher</span>
@@ -118,7 +145,6 @@
         <span class="pill active-all" data-type="all">All</span>
         <span class="pill" data-type="Final Term">Final Term</span>
         <span class="pill" data-type="Mid Term">Mid Term</span>
-        <span class="pill" data-type="Quiz">Quiz</span>
       </div>
     </div>
 
@@ -135,18 +161,6 @@
     <button class="clear-btn" onclick="clearFilters()">
       <i class="fas fa-times"></i> Clear All Filters
     </button>
-  </div>
-
-  <!-- Upload Banner -->
-  <div class="upload-banner" style="background:var(--glass); border:1px solid var(--glass-border); border-radius:16px; padding:20px; text-align:center; margin-top:20px;">
-    <div style="width:44px; height:44px; background:rgba(230,168,23,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-size:18px; color:var(--gold);">
-      <i class="fas fa-cloud-upload-alt"></i>
-    </div>
-    <h4 style="font-size:0.9rem; color:var(--white); margin-bottom:6px;">Have a paper?</h4>
-    <p style="font-size:0.78rem; color:var(--text-light); margin-bottom:14px;">Help fellow students by uploading your past papers.</p>
-    <a href="#" class="upload-btn" style="width:100%; display:flex; justify-content:center; align-items:center; padding:10px 0; background:var(--gold); color:var(--dark); border-radius:8px; text-decoration:none; font-weight:500;">
-      <i class="fas fa-plus" style="margin-right:6px;"></i> Upload Paper
-    </a>
   </div>
 </aside>
 

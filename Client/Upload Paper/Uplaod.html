@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Paper — PaperVault</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../paper.css"> <!-- reuse your styles -->
+  <link rel="stylesheet" href="upload.css">   <!-- optional separate css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<style>
+  /* ── UPLOAD PAGE ── */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  margin: 0;
+  padding: 0;
+}
+
+/* NAV */
+nav {
+  background: rgba(11, 31, 58, 0.95);
+  padding: 16px 5%;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+nav .nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--white);
+  text-decoration: none;
+}
+nav .nav-logo span { color: var(--gold); }
+
+/* UPLOAD PAGE CONTAINER */
+.upload-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  background: var(--navy);
+}
+
+.upload-container {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 40px 32px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+}
+
+.upload-container h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--white);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.upload-container .upload-sub {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+/* FORM */
+#uploadForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--white);
+}
+
+.form-group input,
+.form-group select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--white);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border 0.2s, background 0.2s;
+}
+
+.form-group input::placeholder {
+  color: var(--text-light);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.1);
+}
+
+/* SUBMIT BUTTON */
+.upload-submit {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s, box-shadow 0.25s;
+}
+
+.upload-submit:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(230,168,23,0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .upload-container {
+    padding: 28px 20px;
+  }
+}
+</style>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">Paper<span>Vault</span></a>
+</nav>
+
+<!-- UPLOAD FORM -->
+<div class="upload-page">
+
+  <div class="upload-container">
+    <h2>Upload Past Paper</h2>
+    <p class="upload-sub">Help other students by sharing your paper</p>
+
+    <form id="uploadForm">
+
+      <div class="form-group">
+        <label>Department</label>
+        <select required>
+          <option value="">Select Department</option>
+          <option>Computer Science</option>
+          <option>Software Engineering</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Course</label>
+        <input type="text" placeholder="CS101: Programming" required>
+      </div>
+
+      <div class="form-group">
+        <label>Teacher</label>
+        <input type="text" required>
+      </div>
+
+      <div class="form-group">
+        <label>Semester</label>
+        <select required>
+          <option value="">Select</option>
+          <option>1</option><option>2</option><option>3</option>
+          <option>4</option><option>5</option><option>6</option>
+          <option>7</option><option>8</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Exam Type</label>
+        <select required>
+          <option>Final Term</option>
+          <option>Mid Term</option>
+          <option>Quiz</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Year</label>
+        <input type="number" min="2015" max="2026" required>
+      </div>
+
+      <div class="form-group">
+        <label>Upload File</label>
+        <input type="file" required>
+      </div>
+
+      <button type="submit" class="upload-submit">
+        <i class="fas fa-cloud-upload-alt"></i> Submit Paper
+      </button>
+
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>

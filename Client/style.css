@@ -223,7 +223,9 @@ nav.scrolled {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(230,168,23,0.3);
 }
-
+.upload-box{
+  background-color: yellowgreen;
+}
 .nav-hamburger {
   display: none;
   flex-direction: column;
