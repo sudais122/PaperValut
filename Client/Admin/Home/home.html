@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard | PaperVault</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    Paper<span>Vault</span>
+    <small>Admin Control Panel</small>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <button class="nav-item active" onclick="showPanel('dashboard',this)"><i class="fas fa-th-large"></i> Dashboard</button>
+
+    <div class="nav-section-label">Content</div>
+    <button class="nav-item" onclick="showPanel('papers',this)"><i class="fas fa-file-alt"></i> Manage Papers <span class="badge">12</span></button>
+    <button class="nav-item" onclick="showPanel('pending',this)"><i class="fas fa-clock"></i> Pending Review <span class="badge red">5</span></button>
+    <button class="nav-item" onclick="showPanel('departments',this)"><i class="fas fa-building"></i> Departments</button>
+
+    <div class="nav-section-label">Users</div>
+    <button class="nav-item" onclick="showPanel('users',this)"><i class="fas fa-users"></i> All Users</button>
+    <button class="nav-item" onclick="showPanel('activity',this)"><i class="fas fa-stream"></i> User Activity</button>
+    <button class="nav-item" onclick="showPanel('reports',this)"><i class="fas fa-flag"></i> Reports <span class="badge red">3</span></button>
+
+    <div class="nav-section-label">System</div>
+    <button class="nav-item" onclick="showPanel('settings',this)"><i class="fas fa-cog"></i> Settings</button>
+    <button class="nav-item" onclick="showPanel('logs',this)"><i class="fas fa-terminal"></i> Audit Logs</button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="admin-profile">
+      <div class="avatar">SA</div>
+      <div class="admin-info">
+        <p>Super Admin</p>
+        <small>admin@awkum.edu.pk</small>
+      </div>
+      <button class="logout-btn" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-title">
+      <span id="topbar-label">Dashboard</span>
+      <small id="topbar-sub">Welcome back, Admin</small>
+    </div>
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="search" placeholder="Search papers, users…"/>
+    </div>
+    <button class="topbar-icon" title="Notifications"><i class="fas fa-bell"></i><span class="notif-dot"></span></button>
+    <button class="topbar-icon" title="Refresh" onclick="toast('Data refreshed')"><i class="fas fa-sync-alt"></i></button>
+    <button class="topbar-icon" id="ham" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+  </div>
+
+  <div class="content">
+
+    <!-- ════════════════ DASHBOARD ════════════════ -->
+    <div class="panel active" id="panel-dashboard">
+
+      <div class="stat-row">
+        <div class="stat-card gold">
+          <div class="stat-icon gold"><i class="fas fa-file-alt"></i></div>
+          <div class="stat-num">1,247</div>
+          <div class="stat-label">Total Papers</div>
+          <span class="stat-change up"><i class="fas fa-arrow-up"></i> +38 this week</span>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+          <div class="stat-num">5,893</div>
+          <div class="stat-label">Registered Users</div>
+          <span class="stat-change up"><i class="fas fa-arrow-up"></i> +124 this week</span>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon green"><i class="fas fa-download"></i></div>
+          <div class="stat-num">48.2K</div>
+          <div class="stat-label">Total Downloads</div>
+          <span class="stat-change up"><i class="fas fa-arrow-up"></i> +1.4K today</span>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-icon red"><i class="fas fa-clock"></i></div>
+          <div class="stat-num">5</div>
+          <div class="stat-label">Pending Reviews</div>
+          <span class="stat-change down"><i class="fas fa-exclamation"></i> Needs action</span>
+        </div>
+      </div>
+
+      <div class="two-col-grid">
+        <!-- Upload Trends -->
+        <div class="col-card">
+          <div class="sec-title">Upload Trends <small>Last 7 days</small></div>
+          <div style="display:flex;align-items:flex-end;gap:8px;height:80px;margin-bottom:10px">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:rgba(230,168,23,.25);border-radius:4px 4px 0 0;height:45px"></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.3)">Mon</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:rgba(230,168,23,.25);border-radius:4px 4px 0 0;height:30px"></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.3)">Tue</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:rgba(230,168,23,.25);border-radius:4px 4px 0 0;height:60px"></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.3)">Wed</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:rgba(230,168,23,.25);border-radius:4px 4px 0 0;height:40px"></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.3)">Thu</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:rgba(230,168,23,.25);border-radius:4px 4px 0 0;height:70px"></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.3)">Fri</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:rgba(230,168,23,.25);border-radius:4px 4px 0 0;height:50px"></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.3)">Sat</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:var(--gold);border-radius:4px 4px 0 0;height:80px"></div>
+              <span style="font-size:.65rem;color:rgba(255,255,255,.3)">Sun</span>
+            </div>
+          </div>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.35)">Peak uploads on Sunday — exam season approaching</p>
+        </div>
+
+        <!-- Papers by Department -->
+        <div class="col-card">
+          <div class="sec-title">Papers by Department</div>
+          <div class="progress-row"><div class="progress-label"><span>Computer Science</span><span>342</span></div><div class="progress-track"><div class="progress-fill" style="width:82%"></div></div></div>
+          <div class="progress-row"><div class="progress-label"><span>Mathematics</span><span>218</span></div><div class="progress-track"><div class="progress-fill" style="width:52%;background:var(--info)"></div></div></div>
+          <div class="progress-row"><div class="progress-label"><span>Business Admin</span><span>196</span></div><div class="progress-track"><div class="progress-fill" style="width:47%;background:var(--success)"></div></div></div>
+          <div class="progress-row"><div class="progress-label"><span>Physics</span><span>154</span></div><div class="progress-track"><div class="progress-fill" style="width:37%;background:#a78bfa"></div></div></div>
+          <div class="progress-row"><div class="progress-label"><span>Chemistry</span><span>112</span></div><div class="progress-track"><div class="progress-fill" style="width:27%;background:var(--danger)"></div></div></div>
+          <div class="progress-row"><div class="progress-label"><span>Other</span><span>225</span></div><div class="progress-track"><div class="progress-fill" style="width:54%;background:rgba(255,255,255,.3)"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="col-card">
+        <div class="sec-title" style="margin-bottom:4px">Recent Activity <small>Last 24 hours</small></div>
+        <div class="activity-list">
+          <div class="activity-item"><div class="act-dot gold"></div><div><p><strong>New paper uploaded</strong> — CS-401 Operating Systems Final 2024 by <em>ali.khan@awkum.edu.pk</em></p><small>2 minutes ago</small></div></div>
+          <div class="activity-item"><div class="act-dot green"></div><div><p><strong>Paper approved</strong> — MTH-202 Linear Algebra Mid 2024 now live</p><small>18 minutes ago</small></div></div>
+          <div class="activity-item"><div class="act-dot blue"></div><div><p><strong>New user registered</strong> — sara.ali@student.awkum.edu.pk</p><small>45 minutes ago</small></div></div>
+          <div class="activity-item"><div class="act-dot red"></div><div><p><strong>Paper flagged</strong> — PHY-301 quiz paper reported for incorrect content by 2 users</p><small>1 hour ago</small></div></div>
+          <div class="activity-item"><div class="act-dot gold"></div><div><p><strong>Bulk download</strong> — 47 papers downloaded from CS department in last hour</p><small>1 hour ago</small></div></div>
+          <div class="activity-item"><div class="act-dot blue"></div><div><p><strong>User account updated</strong> — bilal.yousaf profile verified and promoted to Contributor</p><small>2 hours ago</small></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════ MANAGE PAPERS ════════════════ -->
+    <div class="panel" id="panel-papers">
+      <div class="sec-header">
+        <div class="sec-title">Manage Papers <small>All uploaded exam papers</small></div>
+        <div class="ml-auto">
+          <button class="btn btn-gold" onclick="openModal('modal-addpaper')"><i class="fas fa-plus"></i> Add Paper</button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <select onchange="toast('Filter applied')">
+          <option value="">All Departments</option>
+          <option>Computer Science</option>
+          <option>Mathematics</option>
+          <option>Business Admin</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+        </select>
+        <select onchange="toast('Filter applied')">
+          <option value="">All Exam Types</option>
+          <option>Final Term</option>
+          <option>Mid Term</option>
+          <option>Quiz</option>
+          <option>Assignment</option>
+        </select>
+        <select onchange="toast('Filter applied')">
+          <option value="">All Years</option>
+          <option>2024</option><option>2023</option><option>2022</option><option>2021</option>
+        </select>
+        <select onchange="toast('Filter applied')">
+          <option value="">All Status</option>
+          <option>Approved</option><option>Pending</option><option>Rejected</option>
+        </select>
+        <input type="text" placeholder="Search course / teacher…" style="flex:1;min-width:160px"/>
+      </div>
+
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th><input type="checkbox" onclick="selectAll(this)"/></th>
+            <th>Course</th><th>Department</th><th>Teacher</th><th>Type</th><th>Year</th><th>Uploaded By</th><th>Status</th><th>Downloads</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="papers-tbody">
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- ════════════════ PENDING REVIEW ════════════════ -->
+    <div class="panel" id="panel-pending">
+      <div class="sec-header">
+        <div class="sec-title">Pending Review <small>Papers awaiting approval</small></div>
+        <div class="ml-auto">
+          <button class="btn btn-success" onclick="toast('All papers approved!')"><i class="fas fa-check-double"></i> Approve All</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th>Course</th><th>Department</th><th>Teacher</th><th>Type</th><th>Uploaded By</th><th>Date</th><th>Actions</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>CS-501 AI & ML</td><td>Computer Science</td><td>Dr. Waqar Hussain</td><td><span class="tag final">Final Term</span></td><td>hamza.90@student.edu.pk</td><td>Today, 10:42 AM</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Preview opened')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon approve" onclick="toast('Paper approved ✓')"><i class="fas fa-check"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper rejected')"><i class="fas fa-times"></i></button>
+              </div></td></tr>
+            <tr><td>MTH-305 Statistics</td><td>Mathematics</td><td>Prof. Rukhsana Bibi</td><td><span class="tag mid">Mid Term</span></td><td>zara.malik@student.edu.pk</td><td>Today, 09:15 AM</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Preview opened')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon approve" onclick="toast('Paper approved ✓')"><i class="fas fa-check"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper rejected')"><i class="fas fa-times"></i></button>
+              </div></td></tr>
+            <tr><td>PHY-201 Optics</td><td>Physics</td><td>Dr. Kamran Shah</td><td><span class="tag quiz">Quiz</span></td><td>usman.123@student.edu.pk</td><td>Yesterday, 6:30 PM</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Preview opened')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon approve" onclick="toast('Paper approved ✓')"><i class="fas fa-check"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper rejected')"><i class="fas fa-times"></i></button>
+              </div></td></tr>
+            <tr><td>BBA-401 HRM</td><td>Business Admin</td><td>Ms. Sana Tariq</td><td><span class="tag final">Final Term</span></td><td>imran.bba@student.edu.pk</td><td>Yesterday, 3:00 PM</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Preview opened')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon approve" onclick="toast('Paper approved ✓')"><i class="fas fa-check"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper rejected')"><i class="fas fa-times"></i></button>
+              </div></td></tr>
+            <tr><td>CHM-102 Organic</td><td>Chemistry</td><td>Dr. Nadia Rehman</td><td><span class="tag mid">Mid Term</span></td><td>fatima.chem@student.edu.pk</td><td>2 days ago</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Preview opened')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon approve" onclick="toast('Paper approved ✓')"><i class="fas fa-check"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper rejected')"><i class="fas fa-times"></i></button>
+              </div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════ DEPARTMENTS ════════════════ -->
+    <div class="panel" id="panel-departments">
+      <div class="sec-header">
+        <div class="sec-title">Departments <small>Manage university departments</small></div>
+        <div class="ml-auto">
+          <button class="btn btn-gold" onclick="toast('Add department modal')"><i class="fas fa-plus"></i> Add Department</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Department Name</th><th>Code</th><th>Total Papers</th><th>Active Courses</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Computer Science</strong></td><td>CS</td><td>342</td><td>28</td><td><span class="tag active">Active</span></td>
+              <td><div class="action-btns"><button class="btn-icon edit" onclick="toast('Edit department')"><i class="fas fa-edit"></i></button><button class="btn-icon del" onclick="toast('Delete department?')"><i class="fas fa-trash"></i></button></div></td></tr>
+            <tr><td><strong>Mathematics</strong></td><td>MTH</td><td>218</td><td>14</td><td><span class="tag active">Active</span></td>
+              <td><div class="action-btns"><button class="btn-icon edit" onclick="toast('Edit department')"><i class="fas fa-edit"></i></button><button class="btn-icon del" onclick="toast('Delete department?')"><i class="fas fa-trash"></i></button></div></td></tr>
+            <tr><td><strong>Business Administration</strong></td><td>BBA</td><td>196</td><td>22</td><td><span class="tag active">Active</span></td>
+              <td><div class="action-btns"><button class="btn-icon edit" onclick="toast('Edit department')"><i class="fas fa-edit"></i></button><button class="btn-icon del" onclick="toast('Delete department?')"><i class="fas fa-trash"></i></button></div></td></tr>
+            <tr><td><strong>Physics</strong></td><td>PHY</td><td>154</td><td>11</td><td><span class="tag active">Active</span></td>
+              <td><div class="action-btns"><button class="btn-icon edit" onclick="toast('Edit department')"><i class="fas fa-edit"></i></button><button class="btn-icon del" onclick="toast('Delete department?')"><i class="fas fa-trash"></i></button></div></td></tr>
+            <tr><td><strong>Chemistry</strong></td><td>CHM</td><td>112</td><td>9</td><td><span class="tag warning">Inactive</span></td>
+              <td><div class="action-btns"><button class="btn-icon edit" onclick="toast('Edit department')"><i class="fas fa-edit"></i></button><button class="btn-icon del" onclick="toast('Delete department?')"><i class="fas fa-trash"></i></button></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════ USERS ════════════════ -->
+    <div class="panel" id="panel-users">
+      <div class="sec-header">
+        <div class="sec-title">All Users <small>5,893 registered students & contributors</small></div>
+        <div class="ml-auto">
+          <select onchange="toast('Filter applied')"><option>All Roles</option><option>Student</option><option>Contributor</option><option>Moderator</option></select>
+          <select onchange="toast('Filter applied')" style="margin-left:8px"><option>All Status</option><option>Active</option><option>Banned</option><option>Warned</option></select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th>User</th><th>Email</th><th>Role</th><th>Uploads</th><th>Downloads</th><th>Joined</th><th>Status</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- ════════════════ ACTIVITY ════════════════ -->
+    <div class="panel" id="panel-activity">
+      <div class="sec-header">
+        <div class="sec-title">User Activity <small>Real-time actions log</small></div>
+        <div class="ml-auto">
+          <button class="btn btn-outline" onclick="toast('Log exported')"><i class="fas fa-download"></i> Export CSV</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <select><option>All Actions</option><option>Upload</option><option>Download</option><option>Login</option><option>Register</option><option>Flag</option></select>
+        <select><option>Last 24 Hours</option><option>Last 7 Days</option><option>Last 30 Days</option><option>All Time</option></select>
+        <input type="text" placeholder="Filter by user…" style="flex:1"/>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>User</th><th>Action</th><th>Details</th><th>IP Address</th><th>Device</th><th>Time</th></tr></thead>
+          <tbody>
+            <tr><td>ali.khan@awkum.edu.pk</td><td><span class="tag approved">Upload</span></td><td>CS-401 Final Term 2024</td><td>182.178.x.x</td><td><i class="fas fa-mobile-alt"></i> Mobile</td><td>2 min ago</td></tr>
+            <tr><td>sara.ali@student.awkum.edu.pk</td><td><span class="tag mid">Register</span></td><td>New account created</td><td>39.35.x.x</td><td><i class="fas fa-desktop"></i> Desktop</td><td>45 min ago</td></tr>
+            <tr><td>hamza.90@student.edu.pk</td><td><span class="tag final">Download</span></td><td>MTH-101 Mid 2023</td><td>111.68.x.x</td><td><i class="fas fa-mobile-alt"></i> Mobile</td><td>1 hr ago</td></tr>
+            <tr><td>zara.malik@student.edu.pk</td><td><span class="tag quiz">Login</span></td><td>Successful login</td><td>103.212.x.x</td><td><i class="fas fa-desktop"></i> Desktop</td><td>1.5 hr ago</td></tr>
+            <tr><td>usman.123@student.edu.pk</td><td><span class="tag rejected">Flag</span></td><td>Reported PHY-301 as incorrect</td><td>92.38.x.x</td><td><i class="fas fa-mobile-alt"></i> Mobile</td><td>2 hr ago</td></tr>
+            <tr><td>bilal.yousaf@edu.pk</td><td><span class="tag approved">Upload</span></td><td>BBA-201 Mid Term 2024</td><td>203.124.x.x</td><td><i class="fas fa-desktop"></i> Desktop</td><td>3 hr ago</td></tr>
+            <tr><td>nadia.cs@student.edu.pk</td><td><span class="tag final">Download</span></td><td>CS-301 Final 2022</td><td>103.99.x.x</td><td><i class="fas fa-tablet-alt"></i> Tablet</td><td>4 hr ago</td></tr>
+            <tr><td>imran.bba@student.edu.pk</td><td><span class="tag mid">Login</span></td><td>Successful login</td><td>118.92.x.x</td><td><i class="fas fa-mobile-alt"></i> Mobile</td><td>5 hr ago</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════ REPORTS ════════════════ -->
+    <div class="panel" id="panel-reports">
+      <div class="sec-header">
+        <div class="sec-title">Reports <small>Flagged content & user complaints</small></div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Paper</th><th>Reported By</th><th>Reason</th><th>Count</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td>PHY-301 Quiz 2023</td><td>Multiple Users</td><td>Incorrect content / wrong year</td><td><span style="color:var(--danger);font-weight:600">2 reports</span></td><td>Today</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Review paper')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon edit" onclick="toast('Edit paper details')"><i class="fas fa-edit"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper removed')"><i class="fas fa-trash"></i></button>
+              </div></td></tr>
+            <tr><td>CS-202 Final 2021</td><td>ali.raza@student.edu.pk</td><td>Duplicate paper already exists</td><td><span style="color:var(--warning);font-weight:600">1 report</span></td><td>Yesterday</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Review paper')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon edit" onclick="toast('Edit paper details')"><i class="fas fa-edit"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper removed')"><i class="fas fa-trash"></i></button>
+              </div></td></tr>
+            <tr><td>BBA-101 Mid 2022</td><td>sara.edu@student.edu.pk</td><td>Poor scan quality / unreadable</td><td><span style="color:var(--warning);font-weight:600">1 report</span></td><td>2 days ago</td>
+              <td><div class="action-btns">
+                <button class="btn-icon view" onclick="toast('Review paper')"><i class="fas fa-eye"></i></button>
+                <button class="btn-icon edit" onclick="toast('Edit paper details')"><i class="fas fa-edit"></i></button>
+                <button class="btn-icon del" onclick="toast('Paper removed')"><i class="fas fa-trash"></i></button>
+              </div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════ SETTINGS ════════════════ -->
+    <div class="panel" id="panel-settings">
+      <div class="sec-title" style="margin-bottom:24px">System Settings</div>
+      <div class="two-col-grid">
+        <div class="col-card">
+          <div class="sec-title" style="font-size:.95rem;margin-bottom:18px"><i class="fas fa-shield-alt" style="color:var(--gold);margin-right:8px"></i>Access Control</div>
+          <div class="form-group" style="margin-bottom:14px"><label>New Upload Approval</label>
+            <select><option>Require Admin Approval</option><option>Auto-Approve All</option><option>Trusted Users Auto-Approve</option></select></div>
+          <div class="form-group" style="margin-bottom:14px"><label>Student Registration</label>
+            <select><option>Open Registration</option><option>Invite Only</option><option>AWKUM Email Required</option></select></div>
+          <div class="form-group" style="margin-bottom:14px"><label>Max File Size (MB)</label>
+            <input type="text" value="25"/></div>
+          <div class="form-group"><label>Allowed File Types</label>
+            <input type="text" value="pdf, jpg, png"/></div>
+        </div>
+        <div class="col-card">
+          <div class="sec-title" style="font-size:.95rem;margin-bottom:18px"><i class="fas fa-bell" style="color:var(--gold);margin-right:8px"></i>Notifications</div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.85rem;color:rgba(255,255,255,.7)">
+              <input type="checkbox" checked/> Email on new paper upload</label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.85rem;color:rgba(255,255,255,.7)">
+              <input type="checkbox" checked/> Email on new user registration</label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.85rem;color:rgba(255,255,255,.7)">
+              <input type="checkbox" checked/> Alert on flagged content</label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.85rem;color:rgba(255,255,255,.7)">
+              <input type="checkbox"/> Weekly stats digest</label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.85rem;color:rgba(255,255,255,.7)">
+              <input type="checkbox"/> Bulk download alerts</label>
+          </div>
+        </div>
+        <div class="col-card">
+          <div class="sec-title" style="font-size:.95rem;margin-bottom:18px"><i class="fas fa-palette" style="color:var(--gold);margin-right:8px"></i>Site Settings</div>
+          <div class="form-group" style="margin-bottom:14px"><label>Site Name</label><input type="text" value="PaperVault AWKUM"/></div>
+          <div class="form-group" style="margin-bottom:14px"><label>Contact Email</label><input type="text" value="admin@papervault.awkum.edu.pk"/></div>
+          <div class="form-group"><label>Maintenance Mode</label>
+            <select><option>Off — Site is Live</option><option>On — Maintenance Mode</option></select></div>
+        </div>
+        <div class="col-card">
+          <div class="sec-title" style="font-size:.95rem;margin-bottom:18px"><i class="fas fa-database" style="color:var(--gold);margin-right:8px"></i>Data & Backup</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button class="btn btn-outline" onclick="toast('Backup started…')"><i class="fas fa-download"></i> Export All Papers (ZIP)</button>
+            <button class="btn btn-outline" onclick="toast('Exporting users…')"><i class="fas fa-users"></i> Export User Data (CSV)</button>
+            <button class="btn btn-outline" onclick="toast('Logs exported')"><i class="fas fa-file-alt"></i> Export Audit Logs</button>
+            <button class="btn btn-danger" onclick="toast('⚠ This cannot be undone')"><i class="fas fa-trash"></i> Clear Rejected Papers</button>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:right;margin-top:8px">
+        <button class="btn btn-gold" onclick="toast('Settings saved ✓')"><i class="fas fa-save"></i> Save All Settings</button>
+      </div>
+    </div>
+
+    <!-- ════════════════ AUDIT LOGS ════════════════ -->
+    <div class="panel" id="panel-logs">
+      <div class="sec-header">
+        <div class="sec-title">Audit Logs <small>All admin actions recorded</small></div>
+        <div class="ml-auto"><button class="btn btn-outline" onclick="toast('Logs exported')"><i class="fas fa-download"></i> Export</button></div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Admin</th><th>Action</th><th>Target</th><th>IP</th><th>Timestamp</th></tr></thead>
+          <tbody>
+            <tr><td>Super Admin</td><td><span class="tag approved">Approved</span></td><td>CS-401 Final Term 2024</td><td>127.0.0.1</td><td>Today 10:45 AM</td></tr>
+            <tr><td>Super Admin</td><td><span class="tag mid">Edited</span></td><td>User: ali.khan — role changed to Contributor</td><td>127.0.0.1</td><td>Today 10:30 AM</td></tr>
+            <tr><td>Super Admin</td><td><span class="tag rejected">Rejected</span></td><td>BBA-202 Mid 2020 — poor quality</td><td>127.0.0.1</td><td>Today 09:15 AM</td></tr>
+            <tr><td>Super Admin</td><td><span class="tag banned">Banned</span></td><td>User: spam.user@gmail.com</td><td>127.0.0.1</td><td>Yesterday 6:00 PM</td></tr>
+            <tr><td>Super Admin</td><td><span class="tag quiz">Updated</span></td><td>Settings: Approval mode changed</td><td>127.0.0.1</td><td>Yesterday 2:00 PM</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- ════════ MODAL: EDIT PAPER ════════ -->
+<div class="modal-overlay" id="modal-editpaper">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="fas fa-edit" style="color:var(--gold);margin-right:8px"></i>Edit Paper</h3>
+      <button class="modal-close" onclick="closeModal('modal-editpaper')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Course Name</label><input type="text" id="edit-course" value="Data Structures & Algorithms"/></div>
+        <div class="form-group"><label>Course Code</label><input type="text" id="edit-code" value="CS-301"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Department</label>
+          <select id="edit-dept">
+            <option selected>Computer Science</option><option>Mathematics</option><option>Business Admin</option><option>Physics</option><option>Chemistry</option>
+          </select></div>
+        <div class="form-group"><label>Teacher Name</label><input type="text" id="edit-teacher" value="Dr. Ahmad Khan"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Exam Type</label>
+          <select id="edit-type"><option selected>Final Term</option><option>Mid Term</option><option>Quiz</option><option>Assignment</option></select></div>
+        <div class="form-group"><label>Year</label>
+          <select id="edit-year"><option selected>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Status</label>
+          <select id="edit-status"><option selected>Approved</option><option>Pending</option><option>Rejected</option></select></div>
+        <div class="form-group"><label>Uploaded By</label><input type="text" value="ali.khan@awkum.edu.pk" readonly style="opacity:.5"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group"><label>Admin Notes</label><textarea placeholder="Optional internal note…"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-editpaper')">Cancel</button>
+      <button class="btn btn-gold" onclick="closeModal('modal-editpaper');toast('Paper updated successfully ✓')"><i class="fas fa-save"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ MODAL: ADD PAPER ════════ -->
+<div class="modal-overlay" id="modal-addpaper">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="fas fa-plus" style="color:var(--gold);margin-right:8px"></i>Add New Paper</h3>
+      <button class="modal-close" onclick="closeModal('modal-addpaper')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Course Name</label><input type="text" placeholder="e.g. Operating Systems"/></div>
+        <div class="form-group"><label>Course Code</label><input type="text" placeholder="e.g. CS-401"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Department</label>
+          <select><option value="">Select Department</option><option>Computer Science</option><option>Mathematics</option><option>Business Admin</option><option>Physics</option><option>Chemistry</option></select></div>
+        <div class="form-group"><label>Teacher Name</label><input type="text" placeholder="Dr. / Prof. Name"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Exam Type</label>
+          <select><option value="">Select Type</option><option>Final Term</option><option>Mid Term</option><option>Quiz</option><option>Assignment</option></select></div>
+        <div class="form-group"><label>Year</label>
+          <select><option value="">Select Year</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group"><label>Upload File (PDF)</label>
+          <input type="file" accept=".pdf" style="padding:8px;cursor:pointer"/></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-addpaper')">Cancel</button>
+      <button class="btn btn-gold" onclick="closeModal('modal-addpaper');toast('Paper added successfully ✓')"><i class="fas fa-upload"></i> Upload Paper</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ MODAL: USER DETAIL ════════ -->
+<div class="modal-overlay" id="modal-user">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="fas fa-user" style="color:var(--gold);margin-right:8px"></i>User Details</h3>
+      <button class="modal-close" onclick="closeModal('modal-user')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)">
+        <div style="width:54px;height:54px;border-radius:50%;background:rgba(230,168,23,.2);border:2px solid rgba(230,168,23,.4);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:600;color:var(--gold)" id="modal-user-avatar">AK</div>
+        <div>
+          <p style="font-weight:500;font-size:1rem" id="modal-user-name">Ali Khan</p>
+          <p style="font-size:.8rem;color:var(--text-light)" id="modal-user-email">ali.khan@awkum.edu.pk</p>
+          <span class="tag active" style="margin-top:6px;display:inline-flex" id="modal-user-status">Active</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Role</label><select id="modal-user-role"><option selected>Student</option><option>Contributor</option><option>Moderator</option></select></div>
+        <div class="form-group"><label>Account Status</label><select id="modal-user-acc"><option selected>Active</option><option>Warned</option><option>Banned</option></select></div>
+      </div>
+      <div class="form-row">
+        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center"><p style="font-size:1.4rem;font-weight:700;color:var(--gold)" id="mu-uploads">7</p><p style="font-size:.72rem;color:var(--text-light)">Papers Uploaded</p></div>
+        <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:14px;text-align:center"><p style="font-size:1.4rem;font-weight:700;color:var(--info)">142</p><p style="font-size:.72rem;color:var(--text-light)">Papers Downloaded</p></div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group"><label>Admin Note</label><textarea placeholder="Internal note about this user…"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" onclick="closeModal('modal-user');toast('User banned')"><i class="fas fa-ban"></i> Ban User</button>
+      <button class="btn btn-outline" onclick="closeModal('modal-user')">Cancel</button>
+      <button class="btn btn-gold" onclick="closeModal('modal-user');toast('User updated ✓')"><i class="fas fa-save"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toast-msg"></span></div>
+
+<script>
+// ── DATA ──
+const papers = [
+  {course:'Data Structures & Algorithms',code:'CS-301',dept:'Computer Science',teacher:'Dr. Ahmad Khan',type:'Final Term',year:2024,by:'ali.khan@awkum.edu.pk',status:'Approved',dl:342},
+  {course:'Calculus & Analytical Geometry',code:'MTH-101',dept:'Mathematics',teacher:'Prof. Nadia Shah',type:'Mid Term',year:2023,by:'sara.ali@student.edu.pk',status:'Approved',dl:218},
+  {course:'Principles of Management',code:'MGT-201',dept:'Business Admin',teacher:'Mr. Bilal Yousaf',type:'Final Term',year:2024,by:'hamza.90@student.edu.pk',status:'Pending',dl:0},
+  {course:'Digital Logic Design',code:'CS-201',dept:'Computer Science',teacher:'Dr. Sana Mir',type:'Quiz',year:2023,by:'nadia.cs@student.edu.pk',status:'Approved',dl:156},
+  {course:'Organic Chemistry',code:'CHM-102',dept:'Chemistry',teacher:'Dr. Nadia Rehman',type:'Mid Term',year:2022,by:'fatima.chem@student.edu.pk',status:'Rejected',dl:0},
+  {course:'Linear Algebra',code:'MTH-202',dept:'Mathematics',teacher:'Prof. Rukhsana Bibi',type:'Final Term',year:2024,by:'zara.malik@student.edu.pk',status:'Approved',dl:98},
+  {course:'Electromagnetics',code:'PHY-301',dept:'Physics',teacher:'Dr. Kamran Shah',type:'Quiz',year:2023,by:'usman.123@student.edu.pk',status:'Pending',dl:0},
+  {course:'Computer Networks',code:'CS-401',dept:'Computer Science',teacher:'Dr. Waqar Hussain',type:'Final Term',year:2023,by:'imran.bba@student.edu.pk',status:'Approved',dl:274},
+];
+
+const users = [
+  {name:'Ali Khan',email:'ali.khan@awkum.edu.pk',role:'Contributor',uploads:7,downloads:142,joined:'Jan 2024',status:'Active'},
+  {name:'Sara Ali',email:'sara.ali@student.awkum.edu.pk',role:'Student',uploads:0,downloads:38,joined:'Mar 2024',status:'Active'},
+  {name:'Hamza Tariq',email:'hamza.90@student.edu.pk',role:'Contributor',uploads:12,downloads:205,joined:'Sep 2023',status:'Active'},
+  {name:'Zara Malik',email:'zara.malik@student.edu.pk',role:'Student',uploads:2,downloads:67,joined:'Oct 2023',status:'Active'},
+  {name:'Usman Raza',email:'usman.123@student.edu.pk',role:'Student',uploads:1,downloads:89,joined:'Feb 2024',status:'Warned'},
+  {name:'Nadia CS',email:'nadia.cs@student.edu.pk',role:'Contributor',uploads:5,downloads:183,joined:'Aug 2023',status:'Active'},
+  {name:'Fatima Chem',email:'fatima.chem@student.edu.pk',role:'Student',uploads:1,downloads:24,joined:'Nov 2023',status:'Banned'},
+  {name:'Bilal Yousaf',email:'bilal.yousaf@edu.pk',role:'Moderator',uploads:18,downloads:310,joined:'Jun 2023',status:'Active'},
+];
+
+function typeClass(t){return t==='Final Term'?'final':t==='Mid Term'?'mid':'quiz'}
+function statusClass(s){return s.toLowerCase()}
+
+// Render papers table
+function renderPapers(){
+  const tbody = document.getElementById('papers-tbody');
+  tbody.innerHTML = papers.map((p,i)=>`
+    <tr>
+      <td><input type="checkbox"/></td>
+      <td><strong>${p.course}</strong><br/><small style="color:var(--text-light)">${p.code}</small></td>
+      <td>${p.dept}</td>
+      <td style="white-space:nowrap">${p.teacher}</td>
+      <td><span class="tag ${typeClass(p.type)}">${p.type}</span></td>
+      <td>${p.year}</td>
+      <td style="font-size:.78rem;color:var(--text-light)">${p.by}</td>
+      <td><span class="tag ${statusClass(p.status)}">${p.status}</span></td>
+      <td style="color:var(--gold);font-weight:600">${p.dl}</td>
+      <td><div class="action-btns">
+        <button class="btn-icon view" title="Preview" onclick="toast('Previewing ${p.course}')"><i class="fas fa-eye"></i></button>
+        <button class="btn-icon edit" title="Edit" onclick="openModal('modal-editpaper')"><i class="fas fa-edit"></i></button>
+        <button class="btn-icon del" title="Delete" onclick="toast('Paper deleted')"><i class="fas fa-trash"></i></button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// Render users table
+function renderUsers(){
+  const tbody = document.getElementById('users-tbody');
+  tbody.innerHTML = users.map(u=>`
+    <tr>
+      <td style="white-space:nowrap"><strong>${u.name}</strong></td>
+      <td style="font-size:.78rem;color:var(--text-light)">${u.email}</td>
+      <td><span style="font-size:.78rem;background:rgba(255,255,255,.07);padding:3px 10px;border-radius:50px">${u.role}</span></td>
+      <td style="color:var(--gold);font-weight:600">${u.uploads}</td>
+      <td>${u.downloads}</td>
+      <td style="color:var(--text-light);font-size:.78rem">${u.joined}</td>
+      <td><span class="tag ${statusClass(u.status)}">${u.status}</span></td>
+      <td><div class="action-btns">
+        <button class="btn-icon view" title="View Details" onclick="openUserModal('${u.name}','${u.email}',${u.uploads})"><i class="fas fa-eye"></i></button>
+        <button class="btn-icon edit" title="Edit Role" onclick="openUserModal('${u.name}','${u.email}',${u.uploads})"><i class="fas fa-edit"></i></button>
+        <button class="btn-icon ban" title="Ban User" onclick="toast('User ${u.name} banned')"><i class="fas fa-ban"></i></button>
+        <button class="btn-icon del" title="Delete Account" onclick="toast('Account deleted')"><i class="fas fa-trash"></i></button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function openUserModal(name,email,uploads){
+  const initials = name.split(' ').map(w=>w[0]).join('').toUpperCase();
+  document.getElementById('modal-user-avatar').textContent = initials;
+  document.getElementById('modal-user-name').textContent = name;
+  document.getElementById('modal-user-email').textContent = email;
+  document.getElementById('mu-uploads').textContent = uploads;
+  openModal('modal-user');
+}
+
+// Panel switching
+const labels = {
+  dashboard:'Dashboard',papers:'Manage Papers',pending:'Pending Review',
+  departments:'Departments',users:'All Users',activity:'User Activity',
+  reports:'Reports',settings:'Settings',logs:'Audit Logs'
+};
+const subs = {
+  dashboard:'Welcome back, Admin',papers:'Full paper management',pending:'Papers awaiting approval',
+  departments:'Manage departments',users:'View and manage all users',activity:'Real-time user actions',
+  reports:'Flagged content',settings:'System configuration',logs:'Admin action history'
+};
+
+function showPanel(id, el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  document.getElementById('topbar-label').textContent = labels[id]||id;
+  document.getElementById('topbar-sub').textContent = subs[id]||'';
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function openModal(id){ document.getElementById(id).classList.add('open') }
+function closeModal(id){ document.getElementById(id).classList.remove('open') }
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open') })
+});
+
+// Toast
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+function selectAll(cb){
+  document.querySelectorAll('#papers-tbody input[type=checkbox]').forEach(c=>c.checked=cb.checked);
+}
+
+renderPapers();
+renderUsers();
+</script>
+</body>
+</html>
