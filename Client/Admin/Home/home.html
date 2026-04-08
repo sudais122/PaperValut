@@ -13,8 +13,11 @@
 <!-- ── SIDEBAR ── -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
+    <div>
     Paper<span>Vault</span>
     <small>Admin Control Panel</small>
+    </div>
+    <div class="hideicon"><i class="fa-solid fa-bars"></i></div>
   </div>
 
   <nav class="sidebar-nav">
@@ -43,7 +46,7 @@
         <p>Super Admin</p>
         <small>admin@awkum.edu.pk</small>
       </div>
-      <button class="logout-btn" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+      <a href="../login/login.html"><button class="logout-btn" title="Logout"><i class="fas fa-sign-out-alt"></i></button></a>
     </div>
   </div>
 </aside>
@@ -63,9 +66,7 @@
     </div>
     <button class="topbar-icon" title="Notifications"><i class="fas fa-bell"></i><span class="notif-dot"></span></button>
     <button class="topbar-icon" title="Refresh" onclick="toast('Data refreshed')"><i class="fas fa-sync-alt"></i></button>
-    <button class="topbar-icon" id="ham" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
-  </div>
-
+    <button class="topbar-icon" id="ham" onclick="toggleSidebar()">  </div>
   <div class="content">
 
     <!-- ════════════════ DASHBOARD ════════════════ -->
@@ -653,6 +654,7 @@ const labels = {
   departments:'Departments',users:'All Users',activity:'User Activity',
   reports:'Reports',settings:'Settings',logs:'Audit Logs'
 };
+
 const subs = {
   dashboard:'Welcome back, Admin',papers:'Full paper management',pending:'Papers awaiting approval',
   departments:'Manage departments',users:'View and manage all users',activity:'Real-time user actions',

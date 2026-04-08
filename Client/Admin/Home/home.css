@@ -55,12 +55,36 @@ body {
 }
 
 .sidebar-logo {
-    padding: 24px 24px 20px;
+    align-items: center;
+    padding: 24px 2px 24px 20px;
     border-bottom: 1px solid var(--border);
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
     font-weight: 700;
     color: var(--white);
+}
+.hideicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 12px;
+    cursor: pointer;
+
+    /* smooth transition */
+    transition: all 0.3s ease;
+}
+
+/* Stylish hover effect */
+.hideicon:hover{
+    background: rgba(230, 168, 23, .1);
+}
+.hideicon i{
+    cursor: pointer;
+    font-size: 1.5rem;
 }
 
 .sidebar-logo span {
@@ -337,6 +361,7 @@ body {
 }
 
 .stat-card {
+    font-family: sans-serif;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
@@ -348,7 +373,6 @@ body {
 
 .stat-card:hover {
     border-color: rgba(230, 168, 23, .3);
-    transform: translateY(-2px)
 }
 
 .stat-card::after {
@@ -504,7 +528,62 @@ body {
     color: rgba(255, 255, 255, .35);
     white-space: nowrap
 }
+/* ===== SIDEBAR COLLAPSE FEATURE ===== */
 
+/* Default sidebar */
+.sidebar {
+  width: 260px;
+  transition: width 0.3s ease;
+}
+
+/* Collapsed sidebar */
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* Hide text when collapsed */
+.sidebar.collapsed .sidebar-logo span,
+.sidebar.collapsed .sidebar-logo small,
+.sidebar.collapsed .nav-section-label,
+.sidebar.collapsed .nav-item span,
+.sidebar.collapsed .admin-info {
+  display: none;
+}
+
+/* Center items */
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+/* Icon adjustments */
+.sidebar .nav-item i {
+  margin-right: 10px;
+}
+
+.sidebar.collapsed .nav-item i {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* Logo adjustment */
+.sidebar.collapsed .sidebar-logo {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+/* Footer center */
+.sidebar.collapsed .admin-profile {
+  justify-content: center;
+}
+
+/* Smooth fade */
+.nav-item span,
+.sidebar-logo span,
+.sidebar-logo small,
+.admin-info {
+  transition: opacity 0.2s ease;
+}
 .tbl td {
     padding: 13px 16px;
     border-bottom: 1px solid rgba(255, 255, 255, .04);
