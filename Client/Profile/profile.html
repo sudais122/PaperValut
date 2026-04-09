@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Profile | PaperVault</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<style>
+:root{
+  --navy:#0B1F3A;--navy-mid:#132D52;--navy-light:#1A3A6B;
+  --gold:#E6A817;--gold-light:#F5C84A;
+  --white:#FFFFFF;--text:#CBD5E1;--text-light:#8FA0B4;--text-muted:#5A6A7E;
+  --glass:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.09);
+  --success:#22c55e;--danger:#ef4444;--warning:#f59e0b;--info:#3b82f6;
+  --card-bg:rgba(255,255,255,0.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;font-family:'DM Sans',sans-serif;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 55%,var(--navy-light) 100%);color:var(--text);}
+
+/* ── TOPNAV ── */
+.topnav{display:flex;align-items:center;gap:14px;padding:13px 28px;background:rgba(11,31,58,0.8);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:50;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:4px;margin-left:20px;}
+.nav-link{font-size:.8rem;color:var(--text-light);padding:6px 12px;border-radius:7px;cursor:pointer;text-decoration:none;transition:background .15s,color .15s;}
+.nav-link:hover{background:var(--glass);color:var(--white);}
+.nav-link.active{background:rgba(230,168,23,.1);color:var(--gold);}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.nav-notif{width:32px;height:32px;border-radius:8px;border:0.5px solid var(--border);background:var(--glass);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:var(--text-light);font-size:.8rem;}
+.nav-notif .dot{position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.nav-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:600;color:var(--navy);cursor:pointer;}
+
+/* ── LAYOUT ── */
+.page{max-width:1100px;margin:0 auto;padding:28px 20px 60px;}
+
+/* ── PROFILE HEADER ── */
+.profile-header{background:var(--glass);border:0.5px solid var(--border);border-radius:18px;padding:28px;margin-bottom:20px;position:relative;overflow:hidden;}
+.profile-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent);}
+.ph-inner{display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap;}
+.ph-avatar-wrap{position:relative;flex-shrink:0;}
+.ph-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy);}
+.ph-avatar-edit{position:absolute;bottom:0;right:0;width:24px;height:24px;border-radius:50%;background:var(--navy-mid);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.6rem;color:var(--gold);}
+.ph-info{flex:1;min-width:200px;}
+.ph-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--white);margin-bottom:3px;}
+.ph-email{font-size:.82rem;color:var(--text-light);margin-bottom:8px;}
+.ph-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;padding:3px 9px;border-radius:5px;font-weight:500;}
+.badge-gold{background:rgba(230,168,23,.15);color:var(--gold-light);border:0.5px solid rgba(230,168,23,.25);}
+.badge-green{background:rgba(34,197,94,.12);color:#86efac;border:0.5px solid rgba(34,197,94,.2);}
+.badge-blue{background:rgba(59,130,246,.12);color:#93c5fd;border:0.5px solid rgba(59,130,246,.2);}
+.ph-stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:4px;}
+.ph-stat{text-align:center;}
+.ph-stat-num{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--white);}
+.ph-stat-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;}
+.ph-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+
+/* ── STAT CARDS ── */
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.sc-gold::before{background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+.sc-green::before{background:linear-gradient(90deg,var(--success),#86efac);}
+.sc-blue::before{background:linear-gradient(90deg,var(--info),#93c5fd);}
+.sc-purple::before{background:linear-gradient(90deg,#a78bfa,#c4b5fd);}
+.sc-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.78rem;margin-bottom:8px;}
+.sc-icon-gold{background:rgba(230,168,23,.15);color:var(--gold);}
+.sc-icon-green{background:rgba(34,197,94,.15);color:var(--success);}
+.sc-icon-blue{background:rgba(59,130,246,.15);color:var(--info);}
+.sc-icon-purple{background:rgba(167,139,250,.15);color:#a78bfa;}
+.sc-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--white);}
+.sc-label{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-top:2px;}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:4px;margin-bottom:20px;background:var(--card-bg);border:0.5px solid var(--border);border-radius:11px;padding:5px;}
+.tab{flex:1;padding:9px 14px;border-radius:8px;border:none;background:transparent;color:var(--text-light);font-size:.82rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.tab i{font-size:.8rem;}
+.tab:hover{background:var(--glass);color:var(--white);}
+.tab.active{background:rgba(230,168,23,.12);color:var(--gold);border:0.5px solid rgba(230,168,23,.2);}
+
+/* ── PANELS ── */
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── SECTION CARD ── */
+.sec-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;}
+.sec-card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:0.5px solid var(--border);}
+.sec-card-title{font-size:.9rem;font-weight:500;color:var(--white);display:flex;align-items:center;gap:8px;}
+.sec-card-title i{color:var(--gold);font-size:.85rem;}
+.sec-card-sub{font-size:.72rem;color:var(--text-muted);}
+
+/* ── UPLOAD FORM ── */
+.upload-form{padding:20px 18px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{display:flex;flex-direction:column;gap:5px;}
+.form-group label{font-size:.7rem;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;font-weight:500;}
+.form-group label .opt{font-size:.65rem;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400;margin-left:4px;}
+.form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,.06);border:0.5px solid var(--border);border-radius:9px;padding:9px 13px;font-size:.82rem;color:var(--white);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,background .2s;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-muted);}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);background:rgba(230,168,23,.04);}
+.form-group select option{background:var(--navy-mid);color:var(--white);}
+.form-full{grid-column:1/-1;}
+
+.drop-zone{border:1.5px dashed rgba(230,168,23,.3);border-radius:11px;padding:28px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:rgba(230,168,23,.03);position:relative;}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--gold);background:rgba(230,168,23,.07);}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.dz-icon{width:44px;height:44px;border-radius:11px;background:rgba(230,168,23,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--gold);font-size:1rem;}
+.dz-text{font-size:.85rem;color:rgba(255,255,255,.7);font-weight:500;}
+.dz-sub{font-size:.72rem;color:var(--text-muted);margin-top:4px;}
+.file-pill{display:none;align-items:center;gap:8px;background:rgba(230,168,23,.1);border:0.5px solid rgba(230,168,23,.3);border-radius:8px;padding:8px 12px;margin-top:10px;font-size:.8rem;color:var(--gold-light);}
+.file-pill i{font-size:.8rem;color:var(--gold);}
+
+.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:4px;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:9px;font-size:.82rem;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:opacity .2s,transform .1s;}
+.btn:active{transform:scale(.99);}
+.btn:hover{opacity:.88;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);}
+.btn-outline{background:rgba(255,255,255,.07);color:var(--text-light);border:0.5px solid var(--border);}
+.btn-sm{padding:6px 12px;font-size:.75rem;}
+.btn-danger{background:rgba(239,68,68,.15);color:#fca5a5;border:0.5px solid rgba(239,68,68,.25);}
+
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{padding:9px 16px;font-size:.68rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;text-align:left;border-bottom:0.5px solid var(--border);white-space:nowrap;}
+tbody tr{border-bottom:0.5px solid rgba(255,255,255,.04);transition:background .15s;}
+tbody tr:hover{background:rgba(255,255,255,.03);}
+tbody tr:last-child{border-bottom:none;}
+td{padding:11px 16px;font-size:.8rem;color:var(--text);vertical-align:middle;}
+.td-muted{color:var(--text-light);}
+.td-bold{font-weight:500;color:var(--white);}
+.td-gold{color:var(--gold);font-weight:600;}
+
+/* ── TAGS ── */
+.tag{display:inline-flex;align-items:center;font-size:.68rem;padding:3px 9px;border-radius:5px;font-weight:500;white-space:nowrap;}
+.tag-final{background:rgba(230,168,23,.15);color:var(--gold-light);border:0.5px solid rgba(230,168,23,.25);}
+.tag-mid{background:rgba(59,130,246,.12);color:#93c5fd;border:0.5px solid rgba(59,130,246,.2);}
+.tag-quiz{background:rgba(167,139,250,.12);color:#c4b5fd;border:0.5px solid rgba(167,139,250,.2);}
+.tag-approved{background:rgba(34,197,94,.12);color:#86efac;border:0.5px solid rgba(34,197,94,.2);}
+.tag-pending{background:rgba(245,158,11,.12);color:#fcd34d;border:0.5px solid rgba(245,158,11,.2);}
+.tag-rejected{background:rgba(239,68,68,.12);color:#fca5a5;border:0.5px solid rgba(239,68,68,.2);}
+
+/* ── ACTION BTNS ── */
+.act-btns{display:flex;gap:5px;}
+.act-btn{width:26px;height:26px;border-radius:6px;border:0.5px solid var(--border);background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.72rem;color:var(--text-light);transition:background .15s,color .15s,border-color .15s;}
+.act-btn:hover{background:rgba(230,168,23,.12);border-color:rgba(230,168,23,.3);color:var(--gold);}
+.act-btn.del:hover{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3);color:#fca5a5;}
+
+/* ── DOWNLOAD ITEM ── */
+.dl-item{display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:0.5px solid rgba(255,255,255,.04);transition:background .15s;}
+.dl-item:hover{background:rgba(255,255,255,.03);}
+.dl-item:last-child{border-bottom:none;}
+.dl-file-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.dl-info{flex:1;min-width:0;}
+.dl-name{font-size:.85rem;font-weight:500;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dl-meta{font-size:.72rem;color:var(--text-muted);margin-top:2px;}
+.dl-actions{display:flex;gap:6px;flex-shrink:0;}
+
+/* ── SETTINGS ── */
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:0.5px solid rgba(255,255,255,.04);}
+.set-row:last-child{border-bottom:none;}
+.set-info h4{font-size:.85rem;color:var(--white);font-weight:500;}
+.set-info p{font-size:.72rem;color:var(--text-muted);margin-top:2px;}
+.toggle{width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.1);position:relative;cursor:pointer;flex-shrink:0;transition:background .2s;}
+.toggle.on{background:rgba(230,168,23,.5);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--white);transition:transform .2s;}
+.toggle.on::after{transform:translateX(16px);}
+
+/* ── EMPTY STATE ── */
+.empty-state{padding:40px 20px;text-align:center;}
+.empty-icon{width:56px;height:56px;border-radius:14px;background:rgba(230,168,23,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.2rem;color:var(--gold);}
+.empty-title{font-size:.9rem;color:var(--white);font-weight:500;margin-bottom:5px;}
+.empty-sub{font-size:.78rem;color:var(--text-muted);}
+
+/* ── SUCCESS BANNER ── */
+.success-banner{background:rgba(34,197,94,.1);border:0.5px solid rgba(34,197,94,.25);border-radius:10px;padding:12px 16px;display:none;align-items:center;gap:10px;margin-bottom:16px;}
+.success-banner.show{display:flex;}
+.success-banner i{color:var(--success);font-size:.9rem;}
+.success-banner p{font-size:.82rem;color:#86efac;}
+
+/* ── PROFILE EDIT FORM ── */
+.avatar-section{display:flex;align-items:center;gap:16px;padding:18px;border-bottom:0.5px solid var(--border);}
+.edit-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--navy);flex-shrink:0;}
+.avatar-actions{display:flex;flex-direction:column;gap:6px;}
+.avatar-actions small{font-size:.68rem;color:var(--text-muted);}
+
+/* ── GOLD LINE ── */
+.gold-line{width:32px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin-bottom:16px;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy-mid);border:0.5px solid var(--border);border-radius:10px;padding:10px 16px;font-size:.8rem;color:var(--white);z-index:999;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+.toast i{color:var(--gold);}
+
+/* ── PROGRESS BAR ── */
+.progress-track{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-top:6px;}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .stat-row{grid-template-columns:1fr 1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .ph-stats{gap:16px;}
+  .tabs{flex-wrap:wrap;}
+  .tab{flex:unset;min-width:calc(50% - 4px);}
+  .nav-links{display:none;}
+}
+@media(max-width:440px){
+  .stat-row{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAV ── -->
+<nav class="topnav">
+  <a href="#" class="nav-logo">Paper<span>Vault</span></a>
+  <div class="nav-links">
+    <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+    <a href="#" class="nav-link"><i class="fas fa-search"></i> Browse Papers</a>
+    <a href="#" class="nav-link active"><i class="fas fa-user"></i> My Profile</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-notif"><i class="fas fa-bell"></i><div class="dot"></div></div>
+    <div class="nav-avatar" id="nav-av">AK</div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ── SUCCESS BANNER ── -->
+  <div class="success-banner" id="success-banner">
+    <i class="fas fa-check-circle"></i>
+    <p id="success-msg">Paper uploaded successfully! It is now pending admin review.</p>
+  </div>
+
+  <!-- ── PROFILE HEADER ── -->
+  <div class="profile-header">
+    <div class="ph-inner">
+      <div class="ph-avatar-wrap">
+        <div class="ph-avatar" id="ph-av">AK</div>
+        <div class="ph-avatar-edit" onclick="switchTab('settings')"><i class="fas fa-pen"></i></div>
+      </div>
+      <div class="ph-info">
+        <div class="ph-name" id="ph-name">Ali Khan</div>
+        <div class="ph-email" id="ph-email">ali.khan@awkum.edu.pk</div>
+        <div class="ph-badges">
+          <span class="badge badge-gold"><i class="fas fa-star"></i> Contributor</span>
+          <span class="badge badge-green"><i class="fas fa-check-circle"></i> Verified</span>
+          <span class="badge badge-blue"><i class="fas fa-university"></i> AWKUM</span>
+        </div>
+      </div>
+      <div style="margin-left:auto">
+        <div class="ph-stats">
+          <div class="ph-stat"><div class="ph-stat-num" id="stat-uploads">7</div><div class="ph-stat-label">Uploaded</div></div>
+          <div class="ph-stat"><div class="ph-stat-num" id="stat-downloads">142</div><div class="ph-stat-label">Downloaded</div></div>
+          <div class="ph-stat"><div class="ph-stat-num">Jan 2024</div><div class="ph-stat-label">Joined</div></div>
+          <div class="ph-stat"><div class="ph-stat-num" style="color:var(--gold)">4.8</div><div class="ph-stat-label">Rating</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ph-actions">
+      <button class="btn btn-gold" onclick="switchTab('upload')"><i class="fas fa-upload"></i> Upload Paper</button>
+      <button class="btn btn-outline" onclick="switchTab('settings')"><i class="fas fa-cog"></i> Edit Profile</button>
+      <button class="btn btn-outline" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <!-- ── STATS ── -->
+  <div class="stat-row">
+    <div class="stat-card sc-gold">
+      <div class="sc-icon sc-icon-gold"><i class="fas fa-file-upload"></i></div>
+      <div class="sc-num">7</div>
+      <div class="sc-label">Papers Uploaded</div>
+    </div>
+    <div class="stat-card sc-green">
+      <div class="sc-icon sc-icon-green"><i class="fas fa-download"></i></div>
+      <div class="sc-num">142</div>
+      <div class="sc-label">Papers Downloaded</div>
+    </div>
+    <div class="stat-card sc-blue">
+      <div class="sc-icon sc-icon-blue"><i class="fas fa-eye"></i></div>
+      <div class="sc-num">1.2K</div>
+      <div class="sc-label">Profile Views</div>
+    </div>
+    <div class="stat-card sc-purple">
+      <div class="sc-icon sc-icon-purple"><i class="fas fa-heart"></i></div>
+      <div class="sc-num">38</div>
+      <div class="sc-label">Papers Saved</div>
+    </div>
+  </div>
+
+  <!-- ── TABS ── -->
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="switchTab('uploads')"><i class="fas fa-file-alt"></i> My Uploads</button>
+    <button class="tab" onclick="switchTab('downloads')"><i class="fas fa-download"></i> Download History</button>
+    <button class="tab" onclick="switchTab('upload')"><i class="fas fa-cloud-upload-alt"></i> Upload Paper</button>
+    <button class="tab" onclick="switchTab('saved')"><i class="fas fa-bookmark"></i> Saved Papers</button>
+    <button class="tab" onclick="switchTab('settings')"><i class="fas fa-user-cog"></i> Settings</button>
+  </div>
+
+  <!-- ══════════ TAB: MY UPLOADS ══════════ -->
+  <div class="tab-panel active" id="panel-uploads">
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-card-title"><i class="fas fa-file-alt"></i> My Uploaded Papers</div>
+        <div class="sec-card-sub">7 papers total</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Course</th><th>Department</th><th>Type</th><th>Year</th><th>Status</th><th>Downloads</th><th>Uploaded</th><th>Actions</th></tr></thead>
+          <tbody id="uploads-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ TAB: DOWNLOAD HISTORY ══════════ -->
+  <div class="tab-panel" id="panel-downloads">
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-card-title"><i class="fas fa-history"></i> Download History</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="sec-card-sub">142 papers downloaded</span>
+          <button class="btn btn-outline btn-sm" onclick="toast('History cleared')"><i class="fas fa-trash"></i> Clear</button>
+        </div>
+      </div>
+      <div id="dl-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ TAB: UPLOAD PAPER ══════════ -->
+  <div class="tab-panel" id="panel-upload">
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-card-title"><i class="fas fa-cloud-upload-alt"></i> Upload New Paper</div>
+        <span class="sec-card-sub">Submitted papers go through admin review</span>
+      </div>
+      <div class="upload-form">
+        <div class="gold-line"></div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Department</label>
+            <select id="up-dept">
+              <option value="">Select department</option>
+              <option>Computer Science</option>
+              <option>Electrical Engineering</option>
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+              <option>Business Administration</option>
+              <option>Civil Engineering</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Course Name</label>
+            <input type="text" id="up-course" placeholder="e.g. Data Structures & Algorithms"/>
+          </div>
+          <div class="form-group">
+            <label>Teacher Name</label>
+            <input type="text" id="up-teacher" placeholder="e.g. Dr. Ahmad Khan"/>
+          </div>
+          <div class="form-group">
+            <label>Course Code <span class="opt">(optional)</span></label>
+            <input type="text" id="up-code" placeholder="e.g. CS-301"/>
+          </div>
+          <div class="form-group">
+            <label>Exam Type</label>
+            <select id="up-type">
+              <option value="">Select type</option>
+              <option>Final Term</option>
+              <option>Mid Term</option>
+              <option>Quiz</option>
+              <option>Assignment</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Year</label>
+            <select id="up-year">
+              <option value="">Select year</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label>Additional Notes <span class="opt">(optional)</span></label>
+            <textarea id="up-notes" rows="2" placeholder="Any important notes about this paper…"></textarea>
+          </div>
+          <div class="form-group form-full">
+            <label>Upload File</label>
+            <div class="drop-zone" id="drop-zone">
+              <input type="file" id="up-file" accept=".pdf,.doc,.docx"/>
+              <div class="dz-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <p class="dz-text">Drop your file here or click to browse</p>
+              <p class="dz-sub">PDF, DOC, DOCX · Max 25MB</p>
+            </div>
+            <div class="file-pill" id="file-pill"><i class="fas fa-file-pdf"></i><span id="file-name-display">file.pdf</span></div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-outline" onclick="resetUploadForm()"><i class="fas fa-undo"></i> Reset</button>
+          <button class="btn btn-gold" onclick="submitPaper()"><i class="fas fa-paper-plane"></i> Submit Paper</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ TAB: SAVED PAPERS ══════════ -->
+  <div class="tab-panel" id="panel-saved">
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-card-title"><i class="fas fa-bookmark"></i> Saved Papers</div>
+        <span class="sec-card-sub">38 papers saved</span>
+      </div>
+      <div id="saved-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ TAB: SETTINGS ══════════ -->
+  <div class="tab-panel" id="panel-settings">
+
+    <!-- Profile Info -->
+    <div class="sec-card" style="margin-bottom:16px">
+      <div class="sec-card-head">
+        <div class="sec-card-title"><i class="fas fa-user"></i> Profile Information</div>
+      </div>
+      <div class="avatar-section">
+        <div class="edit-avatar" id="edit-av">AK</div>
+        <div class="avatar-actions">
+          <button class="btn btn-outline btn-sm"><i class="fas fa-camera"></i> Change Photo</button>
+          <small>JPG or PNG · Max 2MB</small>
+        </div>
+      </div>
+      <div class="upload-form" style="padding-top:16px">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="set-name" value="Ali Khan"/>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="set-email" value="ali.khan@awkum.edu.pk"/>
+          </div>
+          <div class="form-group">
+            <label>Student ID</label>
+            <input type="text" value="AWKUM-2021-CS-047" readonly style="opacity:.5"/>
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <select>
+              <option selected>Computer Science</option>
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Business Administration</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label>Bio <span class="opt">(optional)</span></label>
+            <textarea rows="2" placeholder="Tell others a bit about yourself…">CS student at AWKUM. Sharing past papers to help fellow students.</textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-gold" onclick="saveProfile()"><i class="fas fa-save"></i> Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Change Password -->
+    <div class="sec-card" style="margin-bottom:16px">
+      <div class="sec-card-head">
+        <div class="sec-card-title"><i class="fas fa-lock"></i> Change Password</div>
+      </div>
+      <div class="upload-form" style="padding-top:16px">
+        <div class="form-grid">
+          <div class="form-group form-full">
+            <label>Current Password</label>
+            <input type="password" placeholder="Enter current password"/>
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" placeholder="Min 8 characters"/>
+          </div>
+          <div class="form-group">
+            <label>Confirm New Password</label>
+            <input type="password" placeholder="Repeat new password"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-gold" onclick="toast('Password updated ✓')"><i class="fas fa-key"></i> Update Password</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="sec-card" style="margin-bottom:16px">
+      <div class="sec-card-head">
+        <div class="sec-card-title"><i class="fas fa-bell"></i> Notification Preferences</div>
+      </div>
+      <div class="set-row"><div class="set-info"><h4>Paper approved</h4><p>Notify when admin approves your uploaded paper</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="set-row"><div class="set-info"><h4>Paper rejected</h4><p>Notify when a paper you uploaded is rejected</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="set-row"><div class="set-info"><h4>New papers in my department</h4><p>Get notified when new CS papers are uploaded</p></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+      <div class="set-row"><div class="set-info"><h4>Weekly digest</h4><p>Summary of popular papers every Monday</p></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-card-title" style="color:#fca5a5"><i class="fas fa-exclamation-triangle" style="color:#ef4444"></i> Danger Zone</div>
+      </div>
+      <div class="set-row"><div class="set-info"><h4>Delete all my uploaded papers</h4><p>Permanently remove all 7 papers you have uploaded</p></div><button class="btn btn-danger btn-sm" onclick="toast('⚠ This action cannot be undone')"><i class="fas fa-trash"></i> Delete All</button></div>
+      <div class="set-row"><div class="set-info"><h4>Delete account</h4><p>Permanently delete your account and all associated data</p></div><button class="btn btn-danger btn-sm" onclick="toast('⚠ Account deletion requested')"><i class="fas fa-user-times"></i> Delete Account</button></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toast-msg"></span></div>
+
+<script>
+/* ── DATA ── */
+const myUploads=[
+  {course:'Data Structures & Algorithms',code:'CS-301',dept:'Computer Science',type:'Final Term',year:2024,status:'Approved',dl:342,date:'Jan 15, 2024'},
+  {course:'Operating Systems',code:'CS-401',dept:'Computer Science',type:'Final Term',year:2023,status:'Approved',dl:218,date:'Dec 3, 2023'},
+  {course:'Digital Logic Design',code:'CS-201',dept:'Computer Science',type:'Quiz',year:2023,status:'Approved',dl:156,date:'Nov 20, 2023'},
+  {course:'Computer Networks',code:'CS-402',dept:'Computer Science',type:'Mid Term',year:2023,status:'Approved',dl:98,date:'Oct 5, 2023'},
+  {course:'Database Systems',code:'CS-303',dept:'Computer Science',type:'Final Term',year:2022,status:'Approved',dl:274,date:'Sep 12, 2023'},
+  {course:'Software Engineering',code:'CS-451',dept:'Computer Science',type:'Mid Term',year:2024,status:'Pending',dl:0,date:'Mar 2, 2024'},
+  {course:'Artificial Intelligence',code:'CS-501',dept:'Computer Science',type:'Quiz',year:2024,status:'Pending',dl:0,date:'Mar 10, 2024'},
+];
+
+const myDownloads=[
+  {course:'Calculus & Analytical Geometry',code:'MTH-101',dept:'Mathematics',type:'Mid Term',year:2023,date:'Today, 2:15 PM',size:'2.4 MB'},
+  {course:'Linear Algebra',code:'MTH-202',dept:'Mathematics',type:'Final Term',year:2024,date:'Today, 10:30 AM',size:'1.8 MB'},
+  {course:'Organic Chemistry',code:'CHM-102',dept:'Chemistry',type:'Mid Term',year:2022,date:'Yesterday, 6:00 PM',size:'3.1 MB'},
+  {course:'Electromagnetics',code:'PHY-301',dept:'Physics',type:'Quiz',year:2023,date:'Yesterday, 3:20 PM',size:'1.2 MB'},
+  {course:'Principles of Management',code:'MGT-201',dept:'Business Admin',type:'Final Term',year:2024,date:'2 days ago',size:'2.9 MB'},
+  {course:'Thermodynamics',code:'PHY-202',dept:'Physics',type:'Final Term',year:2023,date:'3 days ago',size:'4.0 MB'},
+  {course:'Discrete Mathematics',code:'MTH-301',dept:'Mathematics',type:'Final Term',year:2022,date:'1 week ago',size:'1.6 MB'},
+  {course:'Digital Signal Processing',code:'EE-401',dept:'Electrical Engineering',type:'Mid Term',year:2024,date:'1 week ago',size:'2.2 MB'},
+];
+
+const savedPapers=[
+  {course:'Statistics & Probability',code:'MTH-303',dept:'Mathematics',type:'Final Term',year:2023,dl:189},
+  {course:'Computer Architecture',code:'CS-302',dept:'Computer Science',type:'Mid Term',year:2024,dl:421},
+  {course:'Fluid Mechanics',code:'ME-201',dept:'Mechanical Engineering',type:'Final Term',year:2022,dl:97},
+  {course:'Engineering Economics',code:'EE-101',dept:'Electrical Engineering',type:'Quiz',year:2023,dl:63},
+  {course:'Numerical Methods',code:'MTH-401',dept:'Mathematics',type:'Final Term',year:2024,dl:278},
+];
+
+function typeClass(t){return t==='Final Term'?'tag-final':t==='Mid Term'?'tag-mid':'tag-quiz';}
+function statusClass(s){return s==='Approved'?'tag-approved':s==='Pending'?'tag-pending':'tag-rejected';}
+function deptColor(d){
+  const m={'Computer Science':'rgba(230,168,23,.15)','Mathematics':'rgba(59,130,246,.12)','Physics':'rgba(167,139,250,.12)','Chemistry':'rgba(34,197,94,.12)','Business Admin':'rgba(239,68,68,.12)'};
+  return m[d]||'rgba(255,255,255,.07)';
+}
+function deptIcon(d){
+  const m={'Computer Science':'💻','Mathematics':'📐','Physics':'⚛️','Chemistry':'🧪','Business Admin':'📊','Electrical Engineering':'⚡','Mechanical Engineering':'⚙️'};
+  return m[d]||'📄';
+}
+
+/* ── RENDER UPLOADS ── */
+function renderUploads(){
+  document.getElementById('uploads-tbody').innerHTML=myUploads.map(function(p){
+    return '<tr>'+
+      '<td class="td-bold">'+p.course+'<br/><small class="td-muted">'+p.code+'</small></td>'+
+      '<td class="td-muted">'+p.dept+'</td>'+
+      '<td><span class="tag '+typeClass(p.type)+'">'+p.type+'</span></td>'+
+      '<td class="td-muted">'+p.year+'</td>'+
+      '<td><span class="tag '+statusClass(p.status)+'">'+p.status+'</span></td>'+
+      '<td class="td-gold">'+p.dl+'</td>'+
+      '<td class="td-muted" style="white-space:nowrap">'+p.date+'</td>'+
+      '<td><div class="act-btns">'+
+        '<div class="act-btn" title="Download" onclick="toast(\'Downloading '+p.course+'\')"><i class="fas fa-download"></i></div>'+
+        '<div class="act-btn" title="Edit" onclick="toast(\'Edit coming soon\')"><i class="fas fa-edit"></i></div>'+
+        '<div class="act-btn del" title="Delete" onclick="toast(\'Paper deleted\')"><i class="fas fa-trash"></i></div>'+
+      '</div></td>'+
+    '</tr>';
+  }).join('');
+}
+
+/* ── RENDER DOWNLOADS ── */
+function renderDownloads(){
+  document.getElementById('dl-list').innerHTML=myDownloads.map(function(d){
+    return '<div class="dl-item">'+
+      '<div class="dl-file-icon" style="background:'+deptColor(d.dept)+'">'+deptIcon(d.dept)+'</div>'+
+      '<div class="dl-info">'+
+        '<div class="dl-name">'+d.course+' <span class="tag '+typeClass(d.type)+'" style="margin-left:6px">'+d.type+'</span></div>'+
+        '<div class="dl-meta">'+d.code+' · '+d.dept+' · '+d.year+' · '+d.size+'</div>'+
+      '</div>'+
+      '<div class="dl-actions">'+
+        '<span style="font-size:.72rem;color:var(--text-muted);white-space:nowrap;align-self:center">'+d.date+'</span>'+
+        '<div class="act-btn" title="Download again" onclick="toast(\'Re-downloading '+d.course+'\')"><i class="fas fa-redo"></i></div>'+
+        '<div class="act-btn" title="Save" onclick="toast(\'Saved to bookmarks\')"><i class="fas fa-bookmark"></i></div>'+
+        '<div class="act-btn del" title="Remove from history" onclick="this.closest(\'.dl-item\').remove();toast(\'Removed from history\')"><i class="fas fa-times"></i></div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+/* ── RENDER SAVED ── */
+function renderSaved(){
+  document.getElementById('saved-list').innerHTML=savedPapers.map(function(p){
+    return '<div class="dl-item">'+
+      '<div class="dl-file-icon" style="background:'+deptColor(p.dept)+'">'+deptIcon(p.dept)+'</div>'+
+      '<div class="dl-info">'+
+        '<div class="dl-name">'+p.course+' <span class="tag '+typeClass(p.type)+'" style="margin-left:6px">'+p.type+'</span></div>'+
+        '<div class="dl-meta">'+p.code+' · '+p.dept+' · '+p.year+' · <span style="color:var(--gold)">'+p.dl+' downloads</span></div>'+
+      '</div>'+
+      '<div class="dl-actions">'+
+        '<div class="act-btn" title="Download" onclick="toast(\'Downloading '+p.course+'\')"><i class="fas fa-download"></i></div>'+
+        '<div class="act-btn del" title="Remove bookmark" onclick="this.closest(\'.dl-item\').remove();toast(\'Removed from saved\')"><i class="fas fa-bookmark"></i></div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+/* ── TAB SWITCHING ── */
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('panel-'+id).classList.add('active');
+  var tabMap={uploads:0,downloads:1,upload:2,saved:3,settings:4};
+  var tabs=document.querySelectorAll('.tab');
+  if(tabMap[id]!==undefined) tabs[tabMap[id]].classList.add('active');
+}
+
+/* ── YEAR DROPDOWN ── */
+(function(){
+  var sel=document.getElementById('up-year');
+  var cy=new Date().getFullYear();
+  for(var y=cy;y>=2000;y--){var o=document.createElement('option');o.value=y;o.textContent=y;sel.appendChild(o);}
+})();
+
+/* ── FILE DROP ZONE ── */
+var fileInput=document.getElementById('up-file');
+var dropZone=document.getElementById('drop-zone');
+var filePill=document.getElementById('file-pill');
+var fileNameDisplay=document.getElementById('file-name-display');
+
+fileInput.addEventListener('change',function(){
+  if(fileInput.files[0]) showFilePill(fileInput.files[0].name);
+});
+dropZone.addEventListener('dragover',function(e){e.preventDefault();dropZone.classList.add('drag');});
+dropZone.addEventListener('dragleave',function(){dropZone.classList.remove('drag');});
+dropZone.addEventListener('drop',function(e){
+  e.preventDefault();dropZone.classList.remove('drag');
+  var f=e.dataTransfer.files[0];
+  if(f){showFilePill(f.name);}
+});
+function showFilePill(name){
+  fileNameDisplay.textContent=name;
+  filePill.style.display='flex';
+}
+
+/* ── SUBMIT PAPER ── */
+function submitPaper(){
+  var dept=document.getElementById('up-dept').value;
+  var course=document.getElementById('up-course').value.trim();
+  var teacher=document.getElementById('up-teacher').value.trim();
+  var type=document.getElementById('up-type').value;
+  var year=document.getElementById('up-year').value;
+  var file=fileInput.files[0];
+  if(!dept){toast('Please select a department');return;}
+  if(!course){toast('Please enter the course name');return;}
+  if(!teacher){toast('Please enter the teacher name');return;}
+  if(!type){toast('Please select the exam type');return;}
+  if(!year){toast('Please select the year');return;}
+  if(!file){toast('Please upload a file');return;}
+
+  /* Add to uploads list */
+  myUploads.unshift({course:course,code:document.getElementById('up-code').value||'—',dept:dept,type:type,year:parseInt(year),status:'Pending',dl:0,date:'Just now'});
+  document.getElementById('stat-uploads').textContent=myUploads.length;
+  renderUploads();
+  resetUploadForm();
+  showSuccess('Paper "'+course+'" submitted successfully! It is pending admin review.');
+  switchTab('uploads');
+}
+
+function resetUploadForm(){
+  document.getElementById('up-dept').value='';
+  document.getElementById('up-course').value='';
+  document.getElementById('up-teacher').value='';
+  document.getElementById('up-code').value='';
+  document.getElementById('up-type').value='';
+  document.getElementById('up-year').value='';
+  document.getElementById('up-notes').value='';
+  fileInput.value='';
+  filePill.style.display='none';
+  dropZone.classList.remove('drag');
+}
+
+/* ── SAVE PROFILE ── */
+function saveProfile(){
+  var name=document.getElementById('set-name').value.trim();
+  var email=document.getElementById('set-email').value.trim();
+  if(name){
+    document.getElementById('ph-name').textContent=name;
+    var initials=name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().substring(0,2);
+    document.getElementById('ph-av').textContent=initials;
+    document.getElementById('ph-avatar-text').textContent=initials;
+    document.getElementById('edit-av').textContent=initials;
+    document.getElementById('nav-av').textContent=initials;
+  }
+  if(email) document.getElementById('ph-email').textContent=email;
+  toast('Profile saved ✓');
+}
+
+/* ── SUCCESS BANNER ── */
+function showSuccess(msg){
+  var b=document.getElementById('success-banner');
+  document.getElementById('success-msg').textContent=msg;
+  b.classList.add('show');
+  setTimeout(function(){b.classList.remove('show');},5000);
+}
+
+/* ── TOAST ── */
+var toastTimer;
+function toast(msg){
+  var t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show');},2800);
+}
+
+/* ── LOGOUT ── */
+function doLogout(){
+  sessionStorage.removeItem('pv_admin');
+  window.location.href='papervault_admin_login.html';
+}
+
+/* ── INIT ── */
+renderUploads();
+renderDownloads();
+renderSaved();
+</script>
+</body>
+</html>
