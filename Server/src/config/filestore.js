@@ -1,32 +1,36 @@
+// Server/config/fileStore.js
 const fs   = require('fs');
 const path = require('path');
 
-// ── Build absolute path to any data file ──────────────
+// Build absolute path to any file inside /data/
 const dataPath = (filename) =>
   path.join(__dirname, '..', 'data', filename);
 
-// ── Read a JSON file and return parsed array ──────────
+// ── READ ──────────────────────────────────────
+// Reads a JSON file and returns a parsed array.
+// Returns [] if the file is missing or empty.
 const readFile = (filename) => {
   try {
     const raw = fs.readFileSync(dataPath(filename), 'utf-8');
     return JSON.parse(raw);
-  } catch (err) {
-    // If file missing or empty, return empty array
+  } catch {
     return [];
   }
 };
 
-// ── Write data array back to JSON file ────────────────
+// ── WRITE ─────────────────────────────────────
+// Writes data back to the JSON file, pretty-printed.
+// Returns true on success, false on failure.
 const writeFile = (filename, data) => {
   try {
     fs.writeFileSync(
       dataPath(filename),
-      JSON.stringify(data, null, 2),  // pretty print
+      JSON.stringify(data, null, 2),
       'utf-8'
     );
     return true;
   } catch (err) {
-    console.error(`Error writing ${filename}:`, err.message);
+    console.error(`❌ Write error (${filename}):`, err.message);
     return false;
   }
 };

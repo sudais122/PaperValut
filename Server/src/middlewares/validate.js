@@ -1,3 +1,8 @@
+// Server/middleware/validate.js
+// Runs BEFORE the controller.
+// If validation fails it sends the error immediately
+// and the controller never runs.
+
 const validateRegister = (req, res, next) => {
   const { name, email, password } = req.body;
 
@@ -22,7 +27,20 @@ const validateRegister = (req, res, next) => {
     });
   }
 
+  next(); // ✅ all good — pass to controller
+};
+
+const validateLogin = (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: 'Email and password are required'
+    });
+  }
+
   next();
 };
 
-module.exports = { validateRegister };
+module.exports = { validateRegister, validateLogin };

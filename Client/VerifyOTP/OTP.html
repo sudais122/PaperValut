@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify Email — PaperVault</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="otp.css">
+</head>
+<body>
+
+  <a href="../index.html" class="logo">Paper<span>Vault</span></a>
+
+  <div class="card" id="main-card">
+    <div class="icon-ring"><i class="fas fa-envelope-open-text"></i></div>
+    <h1>Check your email</h1>
+    <p class="sub">We sent a 6-digit code to<br><span class="email-highlight" id="display-email">your email</span></p>
+    <div class="gold-line"></div>
+
+    <!-- alerts -->
+    <div class="alert alert-error" id="error-box">
+      <i class="fas fa-times-circle"></i>
+      <span id="error-msg"></span>
+    </div>
+    <div class="alert alert-success" id="success-box">
+      <i class="fas fa-check-circle"></i>
+      <span id="success-msg"></span>
+    </div>
+
+    <span class="otp-label">Enter 6-digit code</span>
+    <div class="otp-row" id="otp-row">
+      <input class="otp-box" id="otp-1" type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code"/>
+      <input class="otp-box" id="otp-2" type="text" inputmode="numeric" maxlength="1"/>
+      <input class="otp-box" id="otp-3" type="text" inputmode="numeric" maxlength="1"/>
+      <input class="otp-box" id="otp-4" type="text" inputmode="numeric" maxlength="1"/>
+      <input class="otp-box" id="otp-5" type="text" inputmode="numeric" maxlength="1"/>
+      <input class="otp-box" id="otp-6" type="text" inputmode="numeric" maxlength="1"/>
+    </div>
+
+    <div class="timer-row">
+      <span class="timer-text" id="timer-text">
+        Code expires in <span class="timer-count" id="timer-count">10:00</span>
+      </span>
+    </div>
+
+    <button class="btn-verify" id="verify-btn" onclick="handleVerify()">
+      <i class="fas fa-shield-check"></i> Verify Email
+    </button>
+
+    <button class="btn-resend" id="resend-btn" onclick="handleResend()" disabled>
+      Resend code
+    </button>
+  </div>
+
+  <!-- success overlay shown after verification -->
+  <div class="card success-state" id="success-card">
+    <div class="check-ring"><i class="fas fa-check"></i></div>
+    <h2>Email Verified!</h2>
+    <p>Your account is confirmed.<br>Redirecting you now…</p>
+  </div>
+  <div class="back-link">
+    <a href="../Login/login.html"><i class="fas fa-arrow-left"></i> Back to Login</a>
+  </div>
+<script src="../JavaScript/otp.js"></script>
+</body>
+</html>
