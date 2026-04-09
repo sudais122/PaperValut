@@ -264,7 +264,7 @@ td{padding:11px 16px;font-size:.8rem;color:var(--text);vertical-align:middle;}
     <div class="ph-actions">
       <button class="btn btn-gold" onclick="switchTab('upload')"><i class="fas fa-upload"></i> Upload Paper</button>
       <button class="btn btn-outline" onclick="switchTab('settings')"><i class="fas fa-cog"></i> Edit Profile</button>
-      <button class="btn btn-outline" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      <a href="../index.html"><button class="btn btn-outline" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button></a>
     </div>
   </div>
 
@@ -297,8 +297,6 @@ td{padding:11px 16px;font-size:.8rem;color:var(--text);vertical-align:middle;}
     <button class="tab active" onclick="switchTab('uploads')"><i class="fas fa-file-alt"></i> My Uploads</button>
     <button class="tab" onclick="switchTab('downloads')"><i class="fas fa-download"></i> Download History</button>
     <button class="tab" onclick="switchTab('upload')"><i class="fas fa-cloud-upload-alt"></i> Upload Paper</button>
-    <button class="tab" onclick="switchTab('saved')"><i class="fas fa-bookmark"></i> Saved Papers</button>
-    <button class="tab" onclick="switchTab('settings')"><i class="fas fa-user-cog"></i> Settings</button>
   </div>
 
   <!-- ══════════ TAB: MY UPLOADS ══════════ -->
@@ -405,17 +403,6 @@ td{padding:11px 16px;font-size:.8rem;color:var(--text);vertical-align:middle;}
           <button class="btn btn-gold" onclick="submitPaper()"><i class="fas fa-paper-plane"></i> Submit Paper</button>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- ══════════ TAB: SAVED PAPERS ══════════ -->
-  <div class="tab-panel" id="panel-saved">
-    <div class="sec-card">
-      <div class="sec-card-head">
-        <div class="sec-card-title"><i class="fas fa-bookmark"></i> Saved Papers</div>
-        <span class="sec-card-sub">38 papers saved</span>
-      </div>
-      <div id="saved-list"></div>
     </div>
   </div>
 

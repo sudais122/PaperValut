@@ -6,7 +6,7 @@
   <title>Browse Papers — PaperVault</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <link rel="stylesheet" href="paper.css">
+  <link rel="stylesheet" href="paper.css">
 </head>
 <body>
 
@@ -40,132 +40,136 @@
     <p>Find exam papers filtered by department, course, teacher, and exam type.</p>
   </div>
   <div class="upload-main">
-<div class="upload-box">
-  <div class="upload-content">
-    <a href="../Upload Paper/Uplaod.html" class="upload-box-btn">
-      <i class="fas fa-cloud-upload-alt"></i>
-      Upload Paper
-    </a>
-    <span class="upload-hint">Help others by sharing</span>
+    <div class="upload-box">
+      <div class="upload-content">
+        <a href="../Upload Paper/Uplaod.html" class="upload-box-btn">
+          <i class="fas fa-cloud-upload-alt"></i>
+          Upload Paper
+        </a>
+        <span class="upload-hint">Help others by sharing</span>
+      </div>
+    </div>
   </div>
 </div>
-</div>
-</div>
+
 <!-- ── MAIN ── -->
 <div class="main-wrap">
 
   <!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="filter-panel">
-    <div class="filter-panel-title">
-      <i class="fas fa-sliders-h"></i> Filters
-    </div>
-
-    <!-- Department -->
-    <div class="filter-group">
-      <span class="filter-label">Department</span>
-      <div class="custom-select">
-        <select id="deptFilter">
-          <option value="">All Departments</option>
-          <option value="bio">Biotechnology</option>
-          <option value="bba">Business Administration</option>
-          <option value="chem">Chemistry</option>
-          <option value="com">Commerce</option>
-          <option value="cs">Computer Science</option>
-          <option value="crim">Criminology</option>
-          <option value="eco">Economics</option>
-          <option value="edu">Education</option>
-          <option value="eng">English</option>
-          <option value="env">Environmental Sciences</option>
-          <option value="hist">History</option>
-          <option value="ir">International Relations</option>
-          <option value="isl">Islamic Studies</option>
-          <option value="it">Information Technology</option>
-          <option value="law">Law</option>
-          <option value="lis">Library & Information Science</option>
-          <option value="math">Mathematics</option>
-          <option value="media">Media & Communication Studies</option>
-          <option value="micro">Microbiology</option>
-          <option value="pak">Pakistan Studies</option>
-          <option value="phy">Physics</option>
-          <option value="pol">Political Science</option>
-          <option value="psy">Psychology</option>
-          <option value="se">Software Engineering</option>
-          <option value="soc">Sociology</option>
-          <option value="stat">Statistics</option>
-          <option value="tour">Tourism & Hospitality</option>
-          <option value="urdu">Urdu</option>
-          <option value="zoo">Zoology</option>
-        </select>
+  <aside class="sidebar">
+    <div class="filter-panel">
+      <div class="filter-panel-title">
+        <i class="fas fa-sliders-h"></i> Filters
       </div>
-    </div>
 
-    <!-- Course -->
-    <div class="filter-group">
-      <span class="filter-label">Course</span>
-      <div class="custom-select">
-        <select id="courseFilter">
-          <option value="">All Courses</option>
-        </select>
+      <!-- Department -->
+      <div class="filter-group">
+        <span class="filter-label">Department</span>
+        <div class="custom-select">
+          <select id="deptFilter">
+            <option value="">All Departments</option>
+            <option value="bio">Biotechnology</option>
+            <option value="bba">Business Administration</option>
+            <option value="chem">Chemistry</option>
+            <option value="com">Commerce</option>
+            <option value="cs">Computer Science</option>
+            <option value="crim">Criminology</option>
+            <option value="eco">Economics</option>
+            <option value="edu">Education</option>
+            <option value="eng">English</option>
+            <option value="env">Environmental Sciences</option>
+            <option value="hist">History</option>
+            <option value="ir">International Relations</option>
+            <option value="isl">Islamic Studies</option>
+            <option value="it">Information Technology</option>
+            <option value="law">Law</option>
+            <option value="lis">Library &amp; Information Science</option>
+            <option value="math">Mathematics</option>
+            <option value="media">Media &amp; Communication Studies</option>
+            <option value="micro">Microbiology</option>
+            <option value="pak">Pakistan Studies</option>
+            <option value="phy">Physics</option>
+            <option value="pol">Political Science</option>
+            <option value="psy">Psychology</option>
+            <option value="se">Software Engineering</option>
+            <option value="soc">Sociology</option>
+            <option value="stat">Statistics</option>
+            <option value="tour">Tourism &amp; Hospitality</option>
+            <option value="urdu">Urdu</option>
+            <option value="zoo">Zoology</option>
+          </select>
+        </div>
       </div>
-    </div>
-<!-- Semester -->
-<div class="filter-group">
-  <span class="filter-label">Semester/Year</span>
-  <div class="custom-select">
-    <select id="semesterFilter" onchange="applyFilters()">
-      <option value="">All Semesters/Years</option>
-      <option value="1">Semester 1</option>
-      <option value="2">Semester 2</option>
-      <option value="3">Semester 3</option>
-      <option value="4">Semester 4</option>
-      <option value="5">Semester 5</option>
-      <option value="6">Semester 6</option>
-      <option value="7">Semester 7</option>
-      <option value="8">Semester 8</option>
-      <option value="8">Semester 9</option>
-      <option value="8">Semester 10</option>
-    </select>
-  </div>
-</div>
-    <!-- Teacher -->
-    <div class="filter-group">
-      <span class="filter-label">Teacher</span>
-      <div class="custom-select">
-        <select id="teacherFilter">
-          <option value="">All Teachers</option>
-        </select>
-      </div>
-    </div>
 
-    <!-- Exam Type -->
-    <div class="filter-group">
-      <span class="filter-label">Exam Type</span>
-      <div class="pill-group">
-        <span class="pill active-all" data-type="all">All</span>
-        <span class="pill" data-type="Final Term">Final Term</span>
-        <span class="pill" data-type="Mid Term">Mid Term</span>
+      <!-- Course -->
+      <div class="filter-group">
+        <span class="filter-label">Course</span>
+        <div class="custom-select">
+          <select id="courseFilter">
+            <option value="">All Courses</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <!-- Year Range -->
-    <div class="filter-group">
-      <span class="filter-label">Year Range</span>
-      <div class="year-range">
-        <input type="number" id="yearFrom" placeholder="From" min="2015" max="2025">
-        <input type="number" id="yearTo" placeholder="To" min="2015" max="2025">
+      <!-- Semester -->
+      <div class="filter-group">
+        <span class="filter-label">Semester / Year</span>
+        <div class="custom-select">
+          <select id="semesterFilter" onchange="applyFilters()">
+            <option value="">All Semesters / Years</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+            <option value="9">Semester 9</option>
+            <option value="10">Semester 10</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <!-- Clear Filters -->
-    <button class="clear-btn" onclick="clearFilters()">
-      <i class="fas fa-times"></i> Clear All Filters
-    </button>
-  </div>
-</aside>
+      <!-- Teacher -->
+      <div class="filter-group">
+        <span class="filter-label">Teacher</span>
+        <div class="custom-select">
+          <select id="teacherFilter">
+            <option value="">All Teachers</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Exam Type -->
+      <div class="filter-group">
+        <span class="filter-label">Exam Type</span>
+        <div class="pill-group">
+          <span class="pill active-all" data-type="all">All</span>
+          <span class="pill" data-type="Final Term">Final Term</span>
+          <span class="pill" data-type="Mid Term">Mid Term</span>
+        </div>
+      </div>
+
+      <!-- Year Range -->
+      <div class="filter-group">
+        <span class="filter-label">Year Range</span>
+        <div class="year-range">
+          <input type="number" id="yearFrom" placeholder="From" min="2015" max="2025">
+          <input type="number" id="yearTo"   placeholder="To"   min="2015" max="2025">
+        </div>
+      </div>
+
+      <!-- Clear Filters -->
+      <button class="clear-btn" onclick="clearFilters()">
+        <i class="fas fa-times"></i> Clear All Filters
+      </button>
+    </div>
+  </aside>
 
   <!-- RESULTS -->
   <main class="results-area">
+
     <!-- Search Row -->
     <div class="search-row">
       <div class="search-box">
@@ -186,8 +190,9 @@
       <div class="active-filters" id="activeChips"></div>
     </div>
 
-    <!-- Papers Grid -->
+    <!-- Papers Grid — filled by paper.js -->
     <div class="papers-grid" id="papersGrid"></div>
+
   </main>
 </div>
 
